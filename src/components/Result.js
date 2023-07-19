@@ -1,20 +1,82 @@
-const Result = ({ selectedOptions, questions, onRetakeExam }) => {
-  const totalQuestions = questions.length;
-  const totalCorrect = selectedOptions.reduce((count, option) => {
+import { useContext } from "react";
+import { useRouter } from "next/router";
+import { QuestionContext } from "../contexts/QuestionContext";
+import Layout from "./Layout";
+import styles from "./result.module.css";
+
+const Result = ({ selectedOptions }) => {
+  const { questions } = useContext(QuestionContext);
+  const router = useRouter();
+
+  const handleRetakeExam = () => {
+    router.push("/");
+  };
+
+  const correctAnswers = selectedOptions.filter((option) => {
     const question = questions.find((q) => q.id === option.questionId);
-    const correctOption = question.options.find((opt) => opt.isCorrect);
-    return correctOption.id === option.optionId ? count + 1 : count;
-  }, 0);
-  const percentageCorrect = (totalCorrect / totalQuestions) * 100;
+    const selectedOptionIds = option.optionIds.sort();
+    const correctOptionIds = question.options
+      .filter((o) => o.isCorrect)
+      .map((o) => o.id)
+      .sort();
+    return (
+      JSON.stringify(selectedOptionIds) === JSON.stringify(correctOptionIds)
+    );
+  });
+
+  const result = Math.floor((correctAnswers.length / questions.length) * 100);
 
   return (
-    <>
-      <h2>Resultado del examen</h2>
-      <p>Preguntas totales: {totalQuestions}</p>
-      <p>Respuestas correctas: {totalCorrect}</p>
-      <p>Porcentaje de respuestas correctas: {percentageCorrect.toFixed(2)}%</p>
-      <button onClick={onRetakeExam}>Rehacer Examen</button>
-    </>
+    <Layout>
+      <div className={styles.resultContainer}>
+        <h2 className={styles.title}>Resultado del Examen</h2>
+        <div className={styles.summary}>
+          <p>
+            Preguntas acertadas: {correctAnswers.length} / {questions.length}
+          </p>
+          <p>Resultado: {result}%</p>
+        </div>
+        <div className={styles.details}>
+          {questions.map((question) => {
+            const selectedOption = selectedOptions.find(
+              (option) => option.questionId === question.id
+            );
+            const isCorrect =
+              selectedOption &&
+              question.options
+                .filter((option) => option.isCorrect)
+                .every((option) =>
+                  selectedOption.optionIds.includes(option.id)
+                );
+            return (
+              <div
+                key={question.id}
+                className={`${styles.question} ${
+                  isCorrect ? styles.correct : styles.incorrect
+                }`}
+              >
+                <h3>{question.text}</h3>
+                <ul>
+                  {question.options.map((option) => (
+                    <li
+                      key={option.id}
+                      className={`${styles.option} ${
+                        option.isCorrect ? styles.correctOption : ""
+                      }`}
+                    >
+                      {option.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+        <button className={styles.retakeButton} onClick={handleRetakeExam}>
+          Rehacer Examen
+        </button>
+      </div>
+    </Layout>
   );
 };
 
