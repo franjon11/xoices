@@ -1,11 +1,8 @@
-import { useContext } from "react";
 import { useRouter } from "next/router";
-import { QuestionContext } from "../contexts/QuestionContext";
 import Layout from "./Layout";
-import styles from "./result.module.css";
+import styles from "../styles/result.module.css";
 
-const Result = ({ selectedOptions }) => {
-  const { questions } = useContext(QuestionContext);
+const Result = ({ questions, selectedOptions }) => {
   const router = useRouter();
 
   const handleRetakeExam = () => {

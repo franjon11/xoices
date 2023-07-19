@@ -28,9 +28,6 @@ const IndexPage = () => {
   return (
     <Layout section="">
       <div className="container">
-        <div className="logo">
-          <img src="/logo.png" alt="Logo" />
-        </div>
         <h1 className="title">Bienvenido al sistema de exámenes</h1>
         <p className="description">
           Por favor, selecciona un archivo de texto con las preguntas:

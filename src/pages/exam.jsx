@@ -6,9 +6,11 @@ import { QuestionContext } from "../utils/QuestionContext";
 const ExamPage = () => {
   const { questions } = useContext(QuestionContext);
   return (
-    <Layout>
-      <Exam questions={questions} />
-    </Layout>
+    questions.length > 0 && (
+      <Layout>
+        <Exam questions={questions} />
+      </Layout>
+    )
   );
 };
 

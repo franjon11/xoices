@@ -1,12 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "./Layout";
 import Question from "./Question";
 import Result from "./Result";
-import { QuestionContext } from "@/utils/QuestionContext";
 
-const Exam = () => {
-  const { questions } = useContext(QuestionContext);
+const Exam = ({ questions }) => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -56,7 +54,6 @@ const Exam = () => {
     router.push("/result");
   };
 
-  console.log(selectedOptions);
   return (
     <Layout section={currentSection.text}>
       {currentQuestion ? (

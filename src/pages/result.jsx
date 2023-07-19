@@ -1,21 +1,14 @@
-import Layout from "../components/Layout";
+import { useContext } from "react";
 import Result from "../components/Result";
+import { QuestionContext } from "@/utils/QuestionContext";
 
-const ResultPage = ({ questions, answers }) => {
+const ResultPage = () => {
+  const { questions } = useContext(QuestionContext);
   return (
-    <Layout>
-      <Result questions={questions} answers={answers} />
-    </Layout>
+    questions.length > 0 && (
+      <Result selectedOptions={[]} questions={questions} />
+    )
   );
 };
-
-export async function getStaticProps() {
-  // Aquí puedes obtener las preguntas y respuestas desde una fuente de datos, como una API
-  const questions = [];
-  const answers = [];
-  return {
-    props: { questions, answers },
-  };
-}
 
 export default ResultPage;

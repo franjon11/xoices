@@ -1,8 +1,9 @@
 import { QuestionProvider } from "../utils/QuestionContext";
 
 function Xoices({ Component, pageProps }) {
+  const { questions } = pageProps;
   return (
-    <QuestionProvider>
+    <QuestionProvider questions={questions}>
       <Component {...pageProps} />
     </QuestionProvider>
   );
