@@ -56,11 +56,24 @@ export const parseQuestionsFromText = (text) => {
     }
 
     if (sectionQuestions.length > 0) {
-      acc.push({ questions: sectionQuestions, text: tituloSeccion });
+      acc.push({
+        questions: sectionQuestions,
+        text: tituloSeccion,
+        totalPreguntas: sectionQuestions.length,
+      });
     }
 
     return acc;
   }, []);
 
   return questions;
+};
+
+export const shuffle = (array) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
 };

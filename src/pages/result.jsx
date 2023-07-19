@@ -1,14 +1,11 @@
 import { useContext } from "react";
-import Result from "../components/Result";
 import { QuestionContext } from "@/utils/QuestionContext";
+import Result from "../components/Result";
 
 const ResultPage = () => {
-  const { questions } = useContext(QuestionContext);
-  return (
-    questions.length > 0 && (
-      <Result selectedOptions={[]} questions={questions} />
-    )
-  );
+  const { selectedOptions, questions } = useContext(QuestionContext);
+
+  return <Result selectedOptions={selectedOptions} questions={questions} />;
 };
 
 export default ResultPage;

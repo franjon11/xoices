@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { shuffle } from "@/utils/question";
 import Layout from "./Layout";
 import Question from "./Question";
 import Result from "./Result";
 
-const Exam = ({ questions }) => {
+const Exam = ({
+  questions,
+  setQuestions,
+  selectedOptions,
+  setSelectedOptions,
+}) => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    // Mezclar preguntas dentro de cada sección al iniciar el examen o rehacerlo
+    const shuffledQuestions = questions.map((section) => ({
+      ...section,
+      questions: shuffle(section.questions),
+    }));
+    setQuestions(shuffledQuestions);
+
+    setSelectedOptions([]);
+    setCurrentSectionIndex(0);
+    setCurrentQuestionIndex(0);
+  }, []);
 
   const currentSection = questions[currentSectionIndex];
   const currentQuestion = currentSection.questions[currentQuestionIndex];
@@ -27,7 +45,7 @@ const Exam = ({ questions }) => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < currentSection.questions.length - 1) {
+    /* if (currentQuestionIndex < currentSection.questions.length - 1) {
       setCurrentQuestionIndex((prevQuestionIndex) => prevQuestionIndex + 1);
     } else if (currentSectionIndex < questions.length - 1) {
       setCurrentSectionIndex((prevSectionIndex) => prevSectionIndex + 1);
@@ -35,7 +53,9 @@ const Exam = ({ questions }) => {
     } else {
       // No hay más preguntas, mostrar resultados
       router.push("/result");
-    }
+    } */
+
+    router.push("/result");
   };
 
   const handlePreviousQuestion = () => {
@@ -59,7 +79,9 @@ const Exam = ({ questions }) => {
       {currentQuestion ? (
         <Question
           question={currentQuestion}
-          selectedOptions={selectedOptions}
+          selectedOptions={
+            selectedOptions[currentQuestionIndex]?.optionIds || []
+          }
           onOptionSelect={handleOptionSelect}
           onNextQuestion={handleNextQuestion}
           onPreviousQuestion={handlePreviousQuestion}
@@ -68,19 +90,9 @@ const Exam = ({ questions }) => {
             currentSectionIndex === questions.length - 1 &&
             currentQuestionIndex === currentSection.questions.length - 1
           }
-          isFirstQuestion={
-            currentSectionIndex === 0 && currentQuestionIndex === 0
-          }
         />
       ) : (
-        <Result
-          selectedOptions={selectedOptions}
-          questions={questions}
-          onRetakeExam={() => {
-            setSelectedOptions([]);
-            setCurrentSectionIndex(0);
-          }}
-        />
+        <Result />
       )}
     </Layout>
   );

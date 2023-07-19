@@ -4,12 +4,16 @@ import Exam from "../components/Exam";
 import { QuestionContext } from "../utils/QuestionContext";
 
 const ExamPage = () => {
-  const { questions } = useContext(QuestionContext);
+  const { questions, setQuestions, selectedOptions, setSelectedOptions } =
+    useContext(QuestionContext);
   return (
     questions.length > 0 && (
-      <Layout>
-        <Exam questions={questions} />
-      </Layout>
+      <Exam
+        questions={questions}
+        setQuestions={setQuestions}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+      />
     )
   );
 };
