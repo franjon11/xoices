@@ -45,7 +45,7 @@ const Exam = ({
   };
 
   const handleNextQuestion = () => {
-    /* if (currentQuestionIndex < currentSection.questions.length - 1) {
+    if (currentQuestionIndex < currentSection.questions.length - 1) {
       setCurrentQuestionIndex((prevQuestionIndex) => prevQuestionIndex + 1);
     } else if (currentSectionIndex < questions.length - 1) {
       setCurrentSectionIndex((prevSectionIndex) => prevSectionIndex + 1);
@@ -53,9 +53,7 @@ const Exam = ({
     } else {
       // No hay más preguntas, mostrar resultados
       router.push("/result");
-    } */
-
-    router.push("/result");
+    }
   };
 
   const handlePreviousQuestion = () => {
