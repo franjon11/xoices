@@ -1,0 +1,43 @@
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .question {
+    margin-bottom: 1rem;
+  }
+  
+  .options {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .option {
+    margin-bottom: 0.5rem;
+  }
+  
+  .option input[type='checkbox'],
+  .option input[type='radio'] {
+    margin-right: 0.5rem;
+  }
+  
+  .navigation {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .previousButton,
+  .submitButton,
+  .nextButton {
+    margin-top: 1rem;
+  }
+  
+  .previousButton{
+    background-color:tomato;
+    margin-right: 1rem;
+  }
