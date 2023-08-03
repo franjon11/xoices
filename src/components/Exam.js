@@ -34,7 +34,7 @@ const Exam = ({
   const handleOptionSelect = (optionIds) => {
     setSelectedOptions((prevSelectedOptions) => {
       const updatedSelectedOptions = prevSelectedOptions.filter(
-        (option) => option.questionId < currentQuestion.id
+        (option) => option.questionId != currentQuestion.id
       );
       updatedSelectedOptions.push({
         questionId: currentQuestion.id,
