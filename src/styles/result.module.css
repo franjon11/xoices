@@ -1,5 +1,4 @@
 .resultContainer {
-    max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
   }
@@ -11,10 +10,16 @@
   
   .summary {
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
   
   .details {
     margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
   
   .question {
@@ -39,6 +44,10 @@
   
   .correctOption {
     color: #4caf50;
+  }
+
+  .selectedOption {
+    background-color: #ffff0f70;
   }
   
   .retakeButton {

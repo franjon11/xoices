@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { shuffle } from "@/utils/question";
 import styles from "../styles/question.module.css";
 
 const Question = ({
@@ -13,6 +14,7 @@ const Question = ({
 }) => {
   const { id, text, options, isMultipleChoice } = question;
   const [selectedOptionIds, setSelectedOptionIds] = useState(selectedOptions);
+  const [optionsQ, setOptionsQ] = useState([]);
 
   const handleOptionSelect = (optionId) => {
     let updatedSelectedOptions;
@@ -33,11 +35,15 @@ const Question = ({
     onOptionSelect(updatedSelectedOptions);
   };
 
+  useEffect(() => {
+    setOptionsQ(shuffle(options));
+  }, [options]);
+
   return (
     <div className={styles.questionContainer}>
       <h2 className={styles.question}>{text}</h2>
       <ul className={styles.options}>
-        {options.map((option) => (
+        {optionsQ.map((option) => (
           <li key={option.id} className={styles.option}>
             <label>
               <input

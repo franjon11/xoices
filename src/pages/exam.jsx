@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Layout from "../components/Layout";
 import Exam from "../components/Exam";
 import { QuestionContext } from "../utils/QuestionContext";
 

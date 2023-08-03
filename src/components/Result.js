@@ -49,10 +49,11 @@ const Result = ({ questions, selectedOptions }) => {
             Preguntas acertadas: {correctAnswers.length} / {totalQuestions}
           </p>
           <p>Resultado: {result}%</p>
+          <button className={styles.retakeButton} onClick={handleRetakeExam}>
+            Rehacer Examen
+          </button>
         </div>
-        <button className={styles.retakeButton} onClick={handleRetakeExam}>
-          Rehacer Examen
-        </button>
+
         <div className={styles.details}>
           {questions.map((s) => {
             return (
@@ -78,12 +79,17 @@ const Result = ({ questions, selectedOptions }) => {
                         }`}
                       >
                         <h3>{question.text}</h3>
-                        <ul>
+                        <ul style={{ textAlign: "left" }}>
                           {question.options.map((option) => (
                             <li
                               key={option.id}
                               className={`${styles.option} ${
                                 option.isCorrect ? styles.correctOption : ""
+                              } ${
+                                selectedOption &&
+                                selectedOption.optionIds.includes(option.id)
+                                  ? styles.selectedOption
+                                  : ""
                               }`}
                             >
                               {option.text}

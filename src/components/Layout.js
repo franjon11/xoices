@@ -10,7 +10,9 @@ const Layout = ({ section, children }) => {
       <header>
         <h1>{section}</h1>
       </header>
-      <main>{children}</main>
+      <main style={{ display: "flex", justifyContent: "center" }}>
+        {children}
+      </main>
     </div>
   );
 };

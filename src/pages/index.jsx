@@ -62,7 +62,10 @@ const IndexPage = () => {
           />
         </div>
         {fileContent && questions.length > 0 && (
-          <p>Se han cargado {questions.length} preguntas.</p>
+          <p>
+            Se han cargado{" "}
+            {questions.reduce((a, e) => a + e.questions.length, 0)} preguntas.
+          </p>
         )}
         <button className="start-button" onClick={handleStartExam}>
           Comenzar examen
