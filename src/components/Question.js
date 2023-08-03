@@ -2,6 +2,16 @@ import { useEffect, useState } from "react";
 import { shuffle } from "@/utils/question";
 import styles from "../styles/question.module.css";
 
+const inciso = (numero) => {
+  if (numero >= 1 && numero <= 26) {
+    // Obtener el código ASCII de la letra 'A' y sumarle el número menos 1
+    return String.fromCharCode(65 + numero - 1).toLowerCase();
+  } else {
+    // Si el número está fuera del rango válido, devolver null o lanzar un error
+    return "";
+  }
+};
+
 const Question = ({
   question,
   selectedOptions,
@@ -43,7 +53,7 @@ const Question = ({
     <div className={styles.questionContainer}>
       <h2 className={styles.question}>{text}</h2>
       <ul className={styles.options}>
-        {optionsQ.map((option) => (
+        {optionsQ.map((option, idx) => (
           <li key={option.id} className={styles.option}>
             <label>
               <input
@@ -53,7 +63,7 @@ const Question = ({
                 checked={selectedOptionIds.includes(option.id)}
                 onChange={() => handleOptionSelect(option.id)}
               />
-              {option.text}
+              {inciso(idx + 1) + ")" + option.text}
             </label>
           </li>
         ))}

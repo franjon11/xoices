@@ -28,7 +28,7 @@ export const parseQuestionsFromText = (text) => {
               .substring(0, lines[j].length - 1)
               .trim();
             options.push({
-              text: optionText,
+              text: optionText.slice(2),
               isCorrect: true,
               id: uuidv4(),
             });
@@ -36,7 +36,7 @@ export const parseQuestionsFromText = (text) => {
           } else {
             const optionText = lines[j].trim();
             options.push({
-              text: optionText,
+              text: optionText.slice(2),
               isCorrect: false,
               id: uuidv4(),
             });
