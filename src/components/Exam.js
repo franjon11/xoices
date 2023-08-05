@@ -13,6 +13,7 @@ const Exam = ({
 }) => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentSelectedOptions, setCurrentSelectedOptions] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,10 +27,20 @@ const Exam = ({
     setSelectedOptions([]);
     setCurrentSectionIndex(0);
     setCurrentQuestionIndex(0);
+    setCurrentSelectedOptions([]);
   }, []);
 
   const currentSection = questions[currentSectionIndex];
   const currentQuestion = currentSection.questions[currentQuestionIndex];
+  const optionsSelectedQ = selectedOptions.find(
+    (x) => x.questionId === currentQuestion.id
+  );
+
+  useEffect(() => {
+    setCurrentSelectedOptions(
+      optionsSelectedQ === undefined ? [] : optionsSelectedQ.optionIds
+    );
+  }, [currentQuestionIndex]);
 
   const handleOptionSelect = (optionIds) => {
     setSelectedOptions((prevSelectedOptions) => {
@@ -54,6 +65,14 @@ const Exam = ({
       // No hay más preguntas, mostrar resultados
       router.push("/result");
     }
+
+    const optionsSelectedQ = selectedOptions.find(
+      (x) => x.questionId === currentQuestion.id
+    );
+
+    setCurrentSelectedOptions(
+      optionsSelectedQ === undefined ? [] : optionsSelectedQ.optionIds
+    );
   };
 
   const handlePreviousQuestion = () => {
@@ -77,9 +96,8 @@ const Exam = ({
       {currentQuestion ? (
         <Question
           question={currentQuestion}
-          selectedOptions={
-            selectedOptions[currentQuestionIndex]?.optionIds || []
-          }
+          selectedOptions={currentSelectedOptions}
+          setSelectedOptions={setCurrentSelectedOptions}
           onOptionSelect={handleOptionSelect}
           onNextQuestion={handleNextQuestion}
           onPreviousQuestion={handlePreviousQuestion}
@@ -87,6 +105,9 @@ const Exam = ({
           isLastQuestion={
             currentSectionIndex === questions.length - 1 &&
             currentQuestionIndex === currentSection.questions.length - 1
+          }
+          isFirstQuestion={
+            currentQuestionIndex === 0 && currentSectionIndex === 0
           }
         />
       ) : (

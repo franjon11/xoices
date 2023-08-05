@@ -15,6 +15,7 @@ const inciso = (numero) => {
 const Question = ({
   question,
   selectedOptions,
+  setSelectedOptions,
   onOptionSelect,
   onNextQuestion,
   onPreviousQuestion,
@@ -23,25 +24,25 @@ const Question = ({
   isFirstQuestion,
 }) => {
   const { id, text, options, isMultipleChoice } = question;
-  const [selectedOptionIds, setSelectedOptionIds] = useState(selectedOptions);
+
   const [optionsQ, setOptionsQ] = useState([]);
 
   const handleOptionSelect = (optionId) => {
     let updatedSelectedOptions;
 
     if (isMultipleChoice) {
-      if (selectedOptionIds.includes(optionId)) {
-        updatedSelectedOptions = selectedOptionIds.filter(
+      if (selectedOptions.includes(optionId)) {
+        updatedSelectedOptions = selectedOptions.filter(
           (id) => id !== optionId
         );
       } else {
-        updatedSelectedOptions = [...selectedOptionIds, optionId];
+        updatedSelectedOptions = [...selectedOptions, optionId];
       }
     } else {
       updatedSelectedOptions = [optionId];
     }
 
-    setSelectedOptionIds(updatedSelectedOptions);
+    setSelectedOptions(updatedSelectedOptions);
     onOptionSelect(updatedSelectedOptions);
   };
 
@@ -60,7 +61,7 @@ const Question = ({
                 type={isMultipleChoice ? "checkbox" : "radio"}
                 name={`question_${id}`}
                 value={option.id}
-                checked={selectedOptionIds.includes(option.id)}
+                checked={selectedOptions.includes(option.id)}
                 onChange={() => handleOptionSelect(option.id)}
               />
               {inciso(idx + 1) + ")" + option.text}
@@ -85,7 +86,7 @@ const Question = ({
           <button
             className={styles.nextButton}
             onClick={onNextQuestion}
-            disabled={selectedOptionIds.length === 0}
+            disabled={selectedOptions.length === 0}
           >
             Siguiente
           </button>

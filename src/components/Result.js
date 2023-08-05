@@ -48,7 +48,7 @@ const Result = ({ questions, selectedOptions }) => {
           <p>
             Preguntas acertadas: {correctAnswers.length} / {totalQuestions}
           </p>
-          <p>Resultado: {result}%</p>
+          <p>Resultado: {result} / 100</p>
           <button className={styles.retakeButton} onClick={handleRetakeExam}>
             Rehacer Examen
           </button>
