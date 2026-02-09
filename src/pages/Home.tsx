@@ -21,7 +21,7 @@ const Home = () => {
     navigate(`/details/${id}`);
   };
 
-  const handleFavoriteQuiz = (id: string) => {
+  const handleFavoriteQuiz = (_id: string) => {
     // TODO: Implementar la lógica de favorito
   };
 
