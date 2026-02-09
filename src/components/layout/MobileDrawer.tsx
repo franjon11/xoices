@@ -24,7 +24,7 @@ const MobileDrawer = forwardRef<HTMLDivElement, MobileDrawerProps>(({ toggleSide
       </div>
       <nav className="flex flex-col gap-2 p-4"> 
         <NavLink to={PAGES.HOME} className={navItemClass}>Library</NavLink>
-        <NavLink to={PAGES.CREATE_QUIZ} className={navItemClass}>Create</NavLink>
+        <NavLink to={"/details/"} className={navItemClass}>Create</NavLink>
         <NavLink to={PAGES.IMPORT_QUIZ} className={navItemClass}>Import</NavLink>
       </nav>
     </div>
