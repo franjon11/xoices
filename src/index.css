@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply bg-almond text-slate-800 antialiased min-h-screen;
+  }
+}
+
+@layer components {
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; 
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-almond;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-sage-light rounded-full border-2 border-almond;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-sage/80;
+  }
+
+  /* Quiz prompt styling for HTML/Images */
+  .quiz-prompt {
+    @apply overflow-hidden break-words;
+  }
+
+  .quiz-prompt img {
+    @apply max-w-full h-auto rounded-3xl my-8 border-4 border-sage/10 shadow-2xl block mx-auto transition-transform hover:scale-[1.01];
+  }
+
+  .quiz-prompt p {
+    @apply mb-4 last:mb-0;
+  }
+
+  .quiz-prompt strong {
+    @apply font-black text-sage;
+  }
+}
+
+/* Animations */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+a, button {
+  cursor: pointer;
+}
