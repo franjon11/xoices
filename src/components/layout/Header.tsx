@@ -22,7 +22,7 @@ const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
 
         <nav className="flex items-center gap-6">
           <NavLink to={PAGES.HOME} className={navItemClass}>Library</NavLink>
-          <NavLink to="/details/0" className={navItemClass}>Create</NavLink>
+          <NavLink to={PAGES.CREATE_QUIZ} className={navItemClass}>Create</NavLink>
           <NavLink to={PAGES.IMPORT_QUIZ} className={navItemClass}>Import</NavLink>
         </nav>
 
