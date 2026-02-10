@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useQuizStore } from "../store/useQuizStore";
 import { parseQuizTxt } from "../helpers/parser";
 import { useNavigate } from "react-router";
-import { ImageIcon, Info, Terminal } from "lucide-react";
+import { Info, Terminal } from "lucide-react";
 import Button from "../components/ui/Button";
 import FileDropZone from "../components/ui/FileUpload/FileDropZone";
 import QuizInfo from "../components/quiz/Details/QuizInfo";
@@ -94,7 +94,8 @@ const QuizImporter = () => {
                 C) 8
               </div>
 
-              <div className="bg-sage/5 p-6 rounded-2xl border border-sage/20">
+              {/* TODO: Implementar imagenes */}
+              {/* <div className="bg-sage/5 p-6 rounded-2xl border border-sage/20">
                 <p className="font-black text-sage uppercase tracking-widest mb-2 flex items-center gap-1">
                   <ImageIcon size={14} strokeWidth={3} />
                   Contenido Rico
@@ -102,7 +103,7 @@ const QuizImporter = () => {
                 <p className="italic text-[10px]">
                   Puedes incluir etiquetas <code className="bg-white/50 px-1 rounded">HTML</code> en el enunciado para insertar imágenes o dar formato.
                 </p>
-              </div>
+              </div> */}
             </div>
           </SectionContainer>
         </aside>
