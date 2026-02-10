@@ -8,11 +8,13 @@ const navItemClass = ({ isActive }: { isActive: boolean }) =>
 
 const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-sage/20 px-6 py-4">
-      <div className="flex sm:hidden items-center">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-sage/20 px-4 sm:px-6 py-4">
+      <div className="flex sm:hidden items-center justify-center">
         <button className="p-2 text-slate-600 hover:text-sage" onClick={toggleSidebar}>
           <Menu size={24} strokeWidth={2.5} />
         </button>
+
+        <Logo className="mx-auto" />
       </div>
 
       <div className="hidden sm:flex items-center justify-between">

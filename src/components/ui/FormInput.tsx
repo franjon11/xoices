@@ -20,19 +20,23 @@ const FormInputElement = forwardRef<HTMLInputElement | HTMLTextAreaElement, Form
   className = "", 
   id,
   ...props
-}: FormInputProps) => {
+}: FormInputProps, ref) => {
 
-  const InputElement = as;
   const baseInputClasses = `${initialClassInput} ${className}`;
+  const propsElement = {
+    id,
+    className: baseInputClasses,
+    ...props
+  };
 
   return (
     <div className="space-y-2">
       <label htmlFor={id} className={initialClassLabel}>{label}</label>
-      <InputElement
-        id={id}
-        className={baseInputClasses}
-        {...props}
-      />
+      {as === 'input' ? (
+        <input {...propsElement} ref={ref as React.RefObject<HTMLInputElement>} />
+      ) : (
+        <textarea {...propsElement} ref={ref as React.RefObject<HTMLTextAreaElement>} />
+      )}
     </div>
   );
 });
