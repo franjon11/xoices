@@ -17,7 +17,7 @@ const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
       <div className="hidden sm:flex items-center justify-between">
         <Link to={PAGES.HOME} className="flex items-center gap-2 text-sage group">
           <BookOpenText className="size-8 group-hover:rotate-12 transition-transform" strokeWidth={2.5} />
-          <h1 className="text-xl font-black tracking-tighter text-slate-800 uppercase">QuizMaster</h1>
+          <h1 className="text-xl font-black tracking-tighter text-slate-800 uppercase">Xoices</h1>
         </Link>
 
         <nav className="flex items-center gap-6">
