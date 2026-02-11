@@ -1,8 +1,9 @@
 import type { LucideIcon, LucideProps } from "lucide-react";
 
 interface IconButtonProps {
-  component: LucideIcon;
-  size?: LucideProps['size'];
+  component: LucideIcon
+  size?: LucideProps['size']
+  animate?: 'pulse' | 'bounce' | 'spin' | 'none'
 }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,14 +40,17 @@ const Button = ({
   ...props 
 }: ButtonProps) => {
   
-  const { component: Icon, size: sizeIcon } = icon ?? {};
+  const { component: Icon, size: sizeIcon, animate = 'none' } = icon ?? {};
+
+  const isAnimate = animate !== 'none';
+  const groupAnimate = isAnimate ? 'group/btn' : '';
 
   return (
     <button 
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${fullWidth ? 'w-full' : ''} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${fullWidth ? 'w-full' : ''} ${className} ${groupAnimate}`}
       {...props}
     >
-      {Icon && <Icon size={sizeIcon} strokeWidth={2.5} />}
+      {Icon && <Icon size={sizeIcon} strokeWidth={2.5} className={isAnimate ? `group-hover/btn:animate-${animate}` : ''} />}
       {children}
     </button>
   );

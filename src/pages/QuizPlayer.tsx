@@ -48,6 +48,9 @@ const QuizPlayer = () => {
     <div className="max-w-6xl mx-auto space-y-12 pb-20 animate-in fade-in duration-500">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8">
+          <div className="lg:hidden mb-4">
+            <Timer startTime={currentSession.startTime} />
+          </div>
           <QuestionCard
             currentQuestion={currentQuestion}
             selectedAnswer={selectedAnswer}
@@ -58,7 +61,9 @@ const QuizPlayer = () => {
           />
         </div>
         <div className="lg:col-span-4 space-y-4">
-          <Timer startTime={currentSession.startTime} />
+          <div className="hidden lg:block">
+            <Timer startTime={currentSession.startTime} />
+          </div>
 
           <ProgressSession
             currentQuestionIndex={currentQuestionIndex}

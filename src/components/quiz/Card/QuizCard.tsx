@@ -38,27 +38,26 @@ const QuizCard = ({ quiz, onStart, onDelete, onEdit, onFavorite }: QuizCardProps
 
   return (
     <div className="bg-white rounded-3xl p-8 shadow-sm border border-sage/10 hover:shadow-2xl hover:-translate-y-2 transition-all group flex flex-col relative overflow-hidden">
-    <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+    
       <ToolBar creatorId={quiz.creator?.id} onDelete={handleDelete} onEdit={handleEdit} onFavorite={handleFavorite} />
-    </div>
     
-    <div className="flex items-center gap-4 mb-6">
-      <div className="size-14 bg-sage/10 rounded-2xl flex items-center justify-center">
-        <BookMarked className="text-sage size-8" strokeWidth={2.5} />
+      <div className="flex items-center gap-4 mb-6">
+        <div className="size-14 bg-sage/10 rounded-2xl flex items-center justify-center">
+          <BookMarked className="text-sage size-8" strokeWidth={2.5} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-xl font-black text-slate-800 truncate">{quiz.title}</h3>
+            <Badge>{cantidadPreguntas} Pregunta{cantidadPreguntas > 1 && "s"}</Badge>
+        </div>
       </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="text-xl font-black text-slate-800 truncate">{quiz.title}</h3>
-          <Badge>{cantidadPreguntas} Pregunta{cantidadPreguntas > 1 && "s"}</Badge>
-      </div>
-    </div>
 
-    <p className="text-slate-500 text-sm mb-8 flex-1 line-clamp-3 font-medium leading-relaxed italic">
-      {quiz.description || "Este examen no tiene descripción."}
-    </p>
-    
-    <Button onClick={() => onStart(quiz.id)} icon={{component: Play}} fullWidth>
-      INICIAR EXAMEN
-    </Button>
+      <p className="text-slate-500 text-sm mb-8 flex-1 line-clamp-3 font-medium leading-relaxed italic">
+        {quiz.description || "Este examen no tiene descripción."}
+      </p>
+      
+      <Button onClick={() => onStart(quiz.id)} icon={{component: Play}} fullWidth>
+        INICIAR EXAMEN
+      </Button>
   </div>
   )
 }

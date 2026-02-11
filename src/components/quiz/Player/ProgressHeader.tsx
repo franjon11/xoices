@@ -38,7 +38,7 @@ const ProgressSession = ({ currentQuestionIndex, totalQuestions, quizTitle = '',
             <button
               key={`nav_${questionId}`}
               onClick={() => questionAnswers.includes(questionId) && goToQuestion(index)}
-              className={`w-10 h-10 lg:w-5 lg:h-5 rounded-md ${
+              className={`w-full aspect-square p-3 rounded-md ${
                 currentQuestionIndex === index
                   ? 'bg-almond-dark'
                   : (questionAnswers.includes(questionId) ? 'bg-sage' : 'bg-sage/20')

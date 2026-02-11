@@ -34,8 +34,8 @@ const Home = () => {
         <h2 className="text-3xl font-black text-slate-800 mb-3">Tu biblioteca está vacía</h2>
         <p className="text-slate-500 max-w-md mb-10 text-lg">Crea tu primer examen manualmente o importa desde un archivo de texto.</p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button onClick={goTo(PAGES.CREATE_QUIZ)} size="lg" icon={{component: Plus}}>Crear Manualmente</Button>
-          <Button onClick={goTo(PAGES.IMPORT_QUIZ)} size="lg" variant="outline" icon={{component: FileUp}}>Importar .TXT</Button>
+          <Button onClick={goTo(PAGES.CREATE_QUIZ)} size="lg" icon={{ component: Plus }}>Crear Manualmente</Button>
+          <Button onClick={goTo(PAGES.IMPORT_QUIZ)} size="lg" variant="outline" icon={{ component: FileUp, animate: 'bounce' }}>Importar .TXT</Button>
         </div>
       </div>
     );

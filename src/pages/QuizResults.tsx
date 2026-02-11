@@ -23,7 +23,7 @@ const QuizResults = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-12 pb-24 animate-in fade-in duration-700">
-      <SectionContainer className="border border-sage/10 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
+      <SectionContainer className="border border-sage/10 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden p-5">
         <div className="absolute top-0 right-0 size-64 bg-sage/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
         
         <PieChart percentage={percentage} />
