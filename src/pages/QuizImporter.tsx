@@ -6,9 +6,10 @@ import { Info, Terminal } from "lucide-react";
 import Button from "../components/ui/Button";
 import FileDropZone from "../components/ui/FileUpload/FileDropZone";
 import QuizInfo from "../components/quiz/Details/QuizInfo";
-import SectionContainer from "../components/ui/SectionContainer";
+import SectionContainer from "../components/layout/SectionContainer";
 import Keyboard from "../components/ui/Keyboard";
 import Code from "../components/ui/Code";
+import MainContainer from "../components/layout/MainContainter";
 
 const QuizImporter = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const QuizImporter = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-12 pb-20 animate-in fade-in duration-500">
+    <MainContainer>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8 space-y-6">
           <QuizInfo
@@ -85,13 +86,18 @@ const QuizImporter = () => {
                 <Keyboard KBD="*" />
                 <p>Marca la opción correcta con un <Code label="*" /> al final.</p>
               </div>
+              <div className="flex gap-4">
+                <Keyboard KBD="E" />
+                <p>Agrega una explicación con la etiqueta <Code label="E:" /> al final.</p>
+              </div>
               
               <div className="bg-almond/20 p-6 rounded-2xl border border-sage/10 font-mono text-[11px] text-slate-600 shadow-inner">
                 <p className="mb-2 text-sage/60 uppercase tracking-tighter">Ejemplo de código</p>
                 Q: ¿Cuánto es 5 + 5? <br/>
                 A) 12 <br/>
                 B) 10* <br/>
-                C) 8
+                C) 8 <br/>
+                E) Es 10 porque 5 + 5 es 10.
               </div>
 
               {/* TODO: Implementar imagenes */}
@@ -108,7 +114,7 @@ const QuizImporter = () => {
           </SectionContainer>
         </aside>
       </div>
-    </div>
+    </MainContainer>
   );
 }
 

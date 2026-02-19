@@ -1,7 +1,7 @@
 import type { Question } from "../../../types/types";
 import { FilePlus } from "lucide-react";
 import QuestionNav from "./QuestionNav";
-import SectionContainer from "../../ui/SectionContainer";
+import SectionContainer from "../../layout/SectionContainer";
 
 interface QuestionNavigatorProps {
   questions: Question[];

@@ -2,7 +2,7 @@ import { Check, ChevronDown, FilePlus } from "lucide-react";
 import Button from "../../ui/Button";
 import type { QuestionFormAddProps } from "../../../types/types";
 import { getCharForIdx } from "../../../helpers/utils";
-import SectionContainer from "../../ui/SectionContainer";
+import SectionContainer from "../../layout/SectionContainer";
 import FormInputElement from "../../ui/FormInput";
 import useCollapsable from "../../../hooks/useCollapsable";
 import { useQuestionDetails } from "../../../hooks/useQuestionDetails";

@@ -5,6 +5,7 @@ import useQuizDetails, { initialQuestion } from "../hooks/useQuizDetails";
 import { Save } from "lucide-react";
 import Button from "../components/ui/Button";
 import type { Quiz } from "../types/types";
+import MainContainer from "../components/layout/MainContainter";
 
 interface QuizDetailsProps {
   quiz: Quiz | undefined;
@@ -33,7 +34,7 @@ const QuizDetails = ({ quiz }: QuizDetailsProps) => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-12 pb-20 animate-in fade-in duration-500">
+    <MainContainer>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8 space-y-6">
           <QuizInfo
@@ -54,7 +55,7 @@ const QuizDetails = ({ quiz }: QuizDetailsProps) => {
           handleAddNewQuestion={handleAddNewQuestion}
         />
       </div>
-    </div>
+    </MainContainer>
   );
 }
 

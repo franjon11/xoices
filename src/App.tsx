@@ -10,7 +10,7 @@ const QuizImporter = lazy(() => import('./pages/QuizImporter'));
 const QuizPlayer = lazy(() => import('./pages/QuizPlayer'));
 const QuizResults = lazy(() => import('./pages/QuizResults'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-
+//const QuizMerge = lazy(() => import('./pages/QuizMerge'));
 const QuizDetailsWrapper = lazy(() => import('./pages/QuizDetailsWrapper'));
 
 const Pages = {
@@ -20,6 +20,7 @@ const Pages = {
   [PAGES.IMPORT_QUIZ]: QuizImporter,
   [PAGES.PLAY_QUIZ]: QuizPlayer,
   [PAGES.RESULTS_QUIZ]: QuizResults,
+  //[PAGES.MERGE_QUIZ]: QuizMerge,
   [PAGES.NOT_FOUND]: NotFound
 }
 

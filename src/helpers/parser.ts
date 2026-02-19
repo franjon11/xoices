@@ -7,6 +7,7 @@ import type { Question, Quiz } from "../types/types";
  * A) Option 1
  * B) Option 2* (asterisk for correct)
  * C) Option 3
+ * E: Explanation
  */
 export const parseQuizTxt = (text: string): Partial<Quiz> => {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
@@ -23,7 +24,8 @@ export const parseQuizTxt = (text: string): Partial<Quiz> => {
         id: Math.random().toString(36).substr(2, 9),
         prompt: line.substring(2).trim(),
         options: [],
-        correctOptionIndex: -1
+        correctOptionIndex: -1,
+        explanation: ""
       };
     } else if (line.match(/^[a-zA-Z]\)/)) {
       if (currentQuestion) {
@@ -34,6 +36,10 @@ export const parseQuizTxt = (text: string): Partial<Quiz> => {
           currentQuestion.correctOptionIndex = (currentQuestion.options?.length || 0);
         }
         currentQuestion.options?.push(optionText);
+      }
+    } else if (line.toLowerCase().startsWith('e:')) {
+      if (currentQuestion) {
+        currentQuestion.explanation = line.substring(2).trim();
       }
     }
   }

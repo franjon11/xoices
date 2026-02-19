@@ -1,9 +1,10 @@
 import { LayoutDashboard } from "lucide-react";
 import CardAnswer from "../components/quiz/Results/CardAnswer";
-import SectionContainer from "../components/ui/SectionContainer";
+import SectionContainer from "../components/layout/SectionContainer";
 import PieChart from "../components/quiz/Results/PieChart";
 import HeaderSummary from "../components/quiz/Results/HeaderSummary";
 import { useResultSummary } from "../hooks/useResultSummary";
+import MainContainer from "../components/layout/MainContainter";
 
 const QuizResults = () => {
   
@@ -22,7 +23,7 @@ const QuizResults = () => {
   } = summary;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12 pb-24 animate-in fade-in duration-700">
+    <MainContainer>
       <SectionContainer className="border border-sage/10 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden p-5">
         <div className="absolute top-0 right-0 size-64 bg-sage/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
         
@@ -63,7 +64,7 @@ const QuizResults = () => {
           TERMINAR REVISION
         </button>
       </div>
-    </div>
+    </MainContainer>
   );
 }
 

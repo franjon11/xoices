@@ -6,5 +6,6 @@ export const PAGES = {
   IMPORT_QUIZ: '/import',
   PLAY_QUIZ: '/play/:quizId',
   RESULTS_QUIZ: '/results',
+  MERGE_QUIZ: '/merge',
   NOT_FOUND: '/not-found'
 }

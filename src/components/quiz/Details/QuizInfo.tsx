@@ -1,4 +1,4 @@
-import SectionContainer from "../../ui/SectionContainer";
+import SectionContainer from "../../layout/SectionContainer";
 
 interface PropertiesProps<T> {
   ref: React.RefObject<T | null>;

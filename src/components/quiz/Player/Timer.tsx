@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Hourglass } from "lucide-react";
-import SectionContainer from "../../ui/SectionContainer"
+import SectionContainer from "../../layout/SectionContainer"
 
 const Timer = ({ startTime }: { startTime: number }) => {
   const [currentTime, setCurrentTime] = useState(() => 0);

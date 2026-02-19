@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { Check, Lightbulb, X } from "lucide-react";
 import type { Question } from "../../../types/types";
 
 interface CardAnswerProps {
@@ -58,9 +58,14 @@ const CardAnswer = ({ q, idx, userAnswer }: CardAnswerProps) => {
       </div>
 
       {explanation && (
-        <div className="mt-6 p-6 rounded-2xl bg-slate-50 border-2 border-slate-100">
-          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Explicación</p>
-          <p className="text-lg font-black text-slate-800">{explanation}</p>
+        <div className="flex items-center gap-3 mt-6 p-6 rounded-2xl bg-slate-50 border-2 border-slate-100">
+          <div className="size-12 bg-sage/10 rounded-2xl flex items-center justify-center text-sage">
+            <Lightbulb size={24} strokeWidth={2.5} />
+          </div>
+          <div>
+            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Explicación</p>
+            <p className="text-2xl font-black text-slate-800">{explanation}</p>
+          </div>
         </div>
       )}
     </div>

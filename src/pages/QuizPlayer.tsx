@@ -7,35 +7,27 @@ import { useQuizFilter } from "../hooks/useQuizFilter";
 import { usePlayer } from "../hooks/usePlayer";
 import ProgressSession from "../components/quiz/Player/ProgressHeader";
 import Timer from "../components/quiz/Player/Timer";
+import MainContainer from "../components/layout/MainContainter";
 
 const QuizPlayer = () => {
   const { quizId = "" } = useParams<{ quizId: string }>();
-  
   const { getQuizById } = useQuizFilter();
   const initSession = useSessionStore(state => state.initSession);
-  
+
   useEffect(() => {
     const quiz = getQuizById(quizId);
     if (quiz) initSession(quiz);
-  }, [initSession, quizId])
+  }, [initSession, quizId]);
 
   const navigate = useNavigate();
 
   const quiz = useSessionStore(state => state.currentQuiz);
   const currentSession = useSessionStore(state => state.currentSession);
-  const currentQuestionIndex = useSessionStore(state => state.currentQuestionIdx)
+  const currentQuestionIndex = useSessionStore(state => state.currentQuestionIdx);
   const setAnswer = useSessionStore(state => state.setAnswer);
   const clearSession = useSessionStore(state => state.clearSession);
 
-  if (!quiz || !currentSession) return null;
-
-  const questions = quiz.questions;
-  const currentQuestion = questions[currentQuestionIndex];
-  const selectedAnswer = currentSession.answers[currentQuestion.id];
-  
-  const questionAnswers = Object.keys(currentSession.answers);
-
-  const totalQuestions = questions.length;
+  const totalQuestions = quiz?.questions?.length || 0;
 
   const {
     handleNext,
@@ -43,9 +35,16 @@ const QuizPlayer = () => {
     goToQuestion,
     typeQuestion
   } = usePlayer(totalQuestions);
+
+  if (!quiz || !currentSession) return null;
+
+  const questions = quiz.questions;
+  const currentQuestion = questions[currentQuestionIndex];
+  const selectedAnswer = currentSession.answers[currentQuestion.id];
+  const questionAnswers = Object.keys(currentSession.answers);
   
   return (
-    <div className="max-w-6xl mx-auto space-y-12 pb-20 animate-in fade-in duration-500">
+    <MainContainer>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8">
           <div className="lg:hidden mb-4">
@@ -85,9 +84,7 @@ const QuizPlayer = () => {
           </div>
         </div>
       </div>
-
-      
-    </div>
+    </MainContainer>
   );
 }
 
