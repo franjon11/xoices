@@ -97,7 +97,7 @@ const QuizImporter = () => {
                 A) 12 <br/>
                 B) 10* <br/>
                 C) 8 <br/>
-                E) Es 10 porque 5 + 5 es 10.
+                E: Es 10 porque 5 + 5 es 10.
               </div>
 
               {/* TODO: Implementar imagenes */}

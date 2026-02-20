@@ -24,7 +24,7 @@ const MobileDrawer = forwardRef<HTMLDivElement, MobileDrawerProps>(({ toggleSide
         <NavLink to={PAGES.HOME} className={navItemClass}>Library</NavLink>
         <NavLink to={PAGES.CREATE_QUIZ} className={navItemClass}>Create</NavLink>
         <NavLink to={PAGES.IMPORT_QUIZ} className={navItemClass}>Import</NavLink>
-        <NavLink to={PAGES.MERGE_QUIZ} className={navItemClass}>Merge</NavLink>
+        {/* <NavLink to={PAGES.MERGE_QUIZ} className={navItemClass}>Merge</NavLink> */}
       </nav>
     </div>
   );
