@@ -18,12 +18,12 @@ export const useResultSummary = () => {
   if (!currentSession || !currentQuiz) return null;
 
   const score = currentQuiz.questions.reduce((acc, q) => {
-    return acc + (currentSession.answers[q.id] === q.correctOptionIndex ? 1 : 0);
+    return acc + (currentSession.answers[q.id] === q.correctOptionId ? 1 : 0);
   }, 0);
 
   const totalQuestions = currentQuiz.questions.length
   const percentage = Math.round((score / totalQuestions) * 100);
-  
+
   const timeSpent = Math.floor(((currentSession.endTime ?? Date.now()) - currentSession.startTime) / 1000);
   const spentMinutes = Math.floor(timeSpent / 60);
   const spentSeconds = timeSpent % 60;
