@@ -67,7 +67,8 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
             <div className="grid grid-cols-1 gap-4">  
               {question.options.map((option, idx) => (
                 <div key={`${question.id}-${currentQuestionIdx}-option-${idx}`} className="flex items-center gap-4 group">
-                  <button 
+                  <button
+                    type="button"
                     onClick={() => setCorrectOptionIdx(idx)}
                     className={`size-8 rounded-2xl border-2 flex items-center justify-center transition-all duration-300 ${
                       correctOptionIdx === idx 
@@ -78,9 +79,10 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
                   >
                     {correctOptionIdx === idx ? <Check size={10} strokeWidth={3} /> : ""}
                   </button>
-                  <input 
+                  <input
+                    id={`${question.id}-${currentQuestionIdx}-option-${idx}`}
                     type="text"
-                    defaultValue={option}
+                    defaultValue={option.text}
                     ref={el => addRefOption(el, idx)}
                     className="flex-1 bg-almond/10 border-2 border-sage/10 rounded-2xl px-6 py-3 text-sm focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all"
                     placeholder={`Opción ${getCharForIdx(idx)}`}

@@ -5,11 +5,12 @@ import Button from "../../ui/Button";
 import ToolBar from "./ToolBar";
 
 export type HandleQuiz = (quizId: string) => void
+type HandleQuizStart = (quizId: string, questions?: number) => void
 export type InternalHandleQuiz = (e: React.MouseEvent<HTMLButtonElement>) => void
 
 interface QuizCardProps {
   quiz: Quiz;
-  onStart: HandleQuiz;
+  onStart: HandleQuizStart;
   onDelete: HandleQuiz;
   onEdit: HandleQuiz;
   onFavorite: HandleQuiz;
@@ -55,7 +56,7 @@ const QuizCard = ({ quiz, onStart, onDelete, onEdit, onFavorite }: QuizCardProps
         {quiz.description || "Este examen no tiene descripción."}
       </p>
       
-      <Button onClick={() => onStart(quiz.id)} icon={{component: Play}} fullWidth>
+      <Button onClick={() => onStart(quiz.id, cantidadPreguntas)} icon={{component: Play}} fullWidth>
         INICIAR EXAMEN
       </Button>
   </div>

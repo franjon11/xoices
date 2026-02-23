@@ -49,7 +49,7 @@ const QuizResults = () => {
               key={q.id}
               q={q}
               idx={idx}
-              userAnswer={answers[q.id]}
+              userAnswerId={answers[q.id]}
             />)
           }
         </div>

@@ -3,11 +3,16 @@ import type { NewQuiz, Question, Quiz } from "../types/types";
 import { useQuizStore } from "../store/useQuizStore";
 import { useNavigate } from "react-router";
 
+const initialOptions = Array.from({ length: 4 }, () => ({
+  id: "",
+  text: ""
+}));
+
 export const initialQuestion: Question = {
   id: "",
   prompt: '',
-  options: ['', '', '', ''],
-  correctOptionIndex: 0
+  options: initialOptions,
+  correctOptionId: ""
 };
 
 export const initialCurrentQuestionIdx = 0;
@@ -25,7 +30,7 @@ const useQuizDetails = (quiz?: Quiz) => {
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(initialCurrentQuestionIdx);
 
   const addQuestionToQuiz = (question: Question) => {
-    if (!question.prompt || question.options.some(o => !o)) return false
+    if (!question.prompt || question.options.some(o => !o.text || o.text.trim() === "")) return false
 
     const questionsCopy = structuredClone(questions);
     let qIdx = questionsCopy.findIndex(q => q.id === question.id);

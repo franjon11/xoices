@@ -7,7 +7,7 @@ interface NavigationProps {
   handleNext: () => void;
   isFirstQuestion: boolean;
   isLastQuestion: boolean;
-  selectedAnswer: number | undefined;
+  selectedAnswerId: string | undefined;
 }
 
 const ConfigBtn: Record<TypeBtn, { icon: LucideIcon, label: string }> = {
@@ -21,7 +21,7 @@ const IconBtnType = ({ typeBtn }: { typeBtn: TypeBtn }) => {
   return <Icon size={20} strokeWidth={3} />
 }
 
-const Navigation = ({ handleBack, handleNext, isFirstQuestion, isLastQuestion, selectedAnswer }: NavigationProps) => {
+const Navigation = ({ handleBack, handleNext, isFirstQuestion, isLastQuestion, selectedAnswerId }: NavigationProps) => {
   return (
     <div className="px-10 pb-12 flex items-center justify-between gap-3">
       <button 
@@ -35,7 +35,7 @@ const Navigation = ({ handleBack, handleNext, isFirstQuestion, isLastQuestion, s
       
       <button 
         onClick={handleNext}
-        disabled={selectedAnswer === undefined}
+        disabled={selectedAnswerId === undefined}
         className="grow flex items-center justify-center gap-3 px-8 h-14 rounded-2xl bg-sage text-white font-black hover:bg-sage-dark shadow-xl shadow-sage/20 transition-all disabled:opacity-40 disabled:scale-100 active:scale-95"
       >
         <span className="hidden sm:inline">{isLastQuestion ? ConfigBtn.finish.label : ConfigBtn.next.label}</span>

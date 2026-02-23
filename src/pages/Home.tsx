@@ -4,14 +4,13 @@ import { useNavigate } from "react-router";
 import { useQuizStore } from "../store/useQuizStore";
 import { PAGES } from "../types/constants";
 import { Archive, FileUp, Plus } from "lucide-react";
+import { useModal } from "../hooks/useModal";
+import ModalStartPlay from "../components/quiz/ModalStartPlay";
+import { useState } from "react";
 
 const Home = () => {
   const { quizzes, deleteQuiz } = useQuizStore();
   const navigate = useNavigate();
-
-  const handleStartQuiz = (id: string) => {
-    navigate(`/play/${id}`);
-  };
 
   const goTo = (path: string) => () => {
     navigate(path);
@@ -41,7 +40,26 @@ const Home = () => {
     );
   }
 
+  const { open, onOpen, onClose } = useModal()
+  const [selectedQuizId, setSelectedQuizId] = useState<{ id: string, totalQuestions?: number } | null>(null);
+  const handleConfirmStart = (id: string, totalQuestions?: number) => {
+    setSelectedQuizId({ id, totalQuestions });
+    onOpen();
+  };
+
+  const handleStart = (questions?: number, time?: number) => {
+    if (selectedQuizId) {
+      let url = new URL(`/play/${selectedQuizId.id}`, window.location.origin);
+      if (questions) url.searchParams.set('questions', questions.toString());
+      if (time) url.searchParams.set('time', time.toString());
+
+      navigate(url.pathname + url.search);
+    }
+  };
+
   return (
+    <>
+    <ModalStartPlay open={open} onClose={onClose} onStart={handleStart} totalQuestions={selectedQuizId?.totalQuestions}  />
     <div className="space-y-10 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -58,7 +76,7 @@ const Home = () => {
           <QuizCard 
             key={quiz.id} 
             quiz={quiz} 
-            onStart={handleStartQuiz} 
+            onStart={handleConfirmStart} 
             onDelete={deleteQuiz} 
             onEdit={handleEditQuiz}
             onFavorite={handleFavoriteQuiz}
@@ -66,6 +84,7 @@ const Home = () => {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

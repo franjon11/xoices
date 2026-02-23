@@ -1,8 +1,9 @@
 import { Check } from "lucide-react";
 import type { SetAnswerFunction } from "../../../store/useSessionStore";
+import type { Option } from "../../../types/types";
 
 interface OptionAnswerProps {
-  option: string;
+  option: Option;
   idx: number;
   setAnswer: SetAnswerFunction;
   questionId: string;
@@ -12,7 +13,7 @@ interface OptionAnswerProps {
 const OptionAnswer = ({ option, idx, setAnswer, questionId, selected = false }: OptionAnswerProps) => {
   
   const handleSelectOption = () => {
-    setAnswer(questionId, idx);
+    setAnswer(questionId, option.id);
   }
 
   return (
@@ -38,7 +39,7 @@ const OptionAnswer = ({ option, idx, setAnswer, questionId, selected = false }: 
       </div>
       <div className="flex-1">
         <p className={`text-sm ${selected ? 'font-black text-slate-800' : 'font-bold text-slate-600'}`}>
-          {option}
+          {option.text}
         </p>
       </div>
     </label>

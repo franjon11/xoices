@@ -14,7 +14,7 @@ const Timer = ({ startTime }: { startTime: number }) => {
   }, [startTime]);
 
   return (
-    <SectionContainer className="sticky p-4 top-20">
+    <SectionContainer className="p-4">
       <div className="flex items-center justify-center gap-2">
         <span className="bg-sage/20 p-2 rounded-lg text-sage-dark">
           <Hourglass size={20} strokeWidth={3} className="animate-pulse" />

@@ -5,14 +5,14 @@ import type { SetAnswerFunction } from "../../../store/useSessionStore";
 
 interface QuestionCardProps {
   currentQuestion: Question;
-  selectedAnswer: number | undefined;
+  selectedAnswerId: string | undefined;
   setAnswer: SetAnswerFunction;
   handleNext: () => void;
   handleBack: () => void;
   typeQuestion: TypeQuestion
 }
 
-const QuestionCard = ({ currentQuestion, selectedAnswer, setAnswer, handleNext, handleBack, typeQuestion }: QuestionCardProps) => {
+const QuestionCard = ({ currentQuestion, selectedAnswerId, setAnswer, handleNext, handleBack, typeQuestion }: QuestionCardProps) => {
 
   const { id, prompt, options } = currentQuestion;
 
@@ -32,7 +32,7 @@ const QuestionCard = ({ currentQuestion, selectedAnswer, setAnswer, handleNext, 
               key={`${id}-${idx}`}
               option={option}
               idx={idx}
-              selected={selectedAnswer === idx}
+              selected={selectedAnswerId === option.id}
               setAnswer={setAnswer}
               questionId={id}
             />
@@ -45,7 +45,7 @@ const QuestionCard = ({ currentQuestion, selectedAnswer, setAnswer, handleNext, 
         handleNext={handleNext}
         isFirstQuestion={isFirstQuestion}
         isLastQuestion={isLastQuestion}
-        selectedAnswer={selectedAnswer}
+        selectedAnswerId={selectedAnswerId}
       />
     </section>
   )

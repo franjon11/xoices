@@ -4,11 +4,16 @@ export interface User {
   avatar: string;
 }
 
+export interface Option {
+  id: string;
+  text: string;
+}
+
 export interface Question {
   id: string;
-  prompt: string; // Supports HTML for images
-  options: string[];
-  correctOptionIndex: number;
+  prompt: string;
+  options: Option[];
+  correctOptionId: string;
   explanation?: string;
 }
 
@@ -27,10 +32,11 @@ export type NewQuiz = Omit<Quiz, 'id' | 'createdAt' | 'creator'>;
 
 export interface QuizSession {
   quizId: string;
-  answers: Record<string, number>; // questionId -> selectedIndex (MAS ADELANTE TOMAR TIEMPO)
+  answers: Record<string, string>; // questionId -> optionId (MAS ADELANTE TOMAR TIEMPO)
   isCompleted: boolean;
   startTime: number;
   endTime?: number;
+  timeLimit?: number;
 }
 
 export type ViewType = 'dashboard' | 'create' | 'import' | 'play' | 'results';

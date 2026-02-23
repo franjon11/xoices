@@ -8,6 +8,7 @@ import { usePlayer } from "../hooks/usePlayer";
 import ProgressSession from "../components/quiz/Player/ProgressHeader";
 import Timer from "../components/quiz/Player/Timer";
 import MainContainer from "../components/layout/MainContainter";
+import CountdownTimer from "../components/quiz/Player/ContdownTimer";
 
 const QuizPlayer = () => {
   const { quizId = "" } = useParams<{ quizId: string }>();
@@ -15,8 +16,17 @@ const QuizPlayer = () => {
   const initSession = useSessionStore(state => state.initSession);
 
   useEffect(() => {
+    clearSession();
+  }, []);
+
+  useEffect(() => {
     const quiz = getQuizById(quizId);
-    if (quiz) initSession(quiz);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const questionsParam = urlParams.get('questions') ?? undefined;
+    const timeParam = urlParams.get('time') ?? undefined;
+
+    if (quiz) initSession(quiz, questionsParam, timeParam);
   }, [initSession, quizId]);
 
   const navigate = useNavigate();
@@ -33,7 +43,8 @@ const QuizPlayer = () => {
     handleNext,
     handleBack,
     goToQuestion,
-    typeQuestion
+    typeQuestion,
+    finishSession
   } = usePlayer(totalQuestions);
 
   if (!quiz || !currentSession) return null;
@@ -42,17 +53,20 @@ const QuizPlayer = () => {
   const currentQuestion = questions[currentQuestionIndex];
   const selectedAnswer = currentSession.answers[currentQuestion.id];
   const questionAnswers = Object.keys(currentSession.answers);
-  
+
   return (
     <MainContainer>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8">
           <div className="lg:hidden mb-4">
-            <Timer startTime={currentSession.startTime} />
+            {currentSession.timeLimit ?
+              <CountdownTimer timeLimit={currentSession.timeLimit} onTimeUp={finishSession} /> :
+              <Timer startTime={currentSession.startTime} />
+            }
           </div>
           <QuestionCard
             currentQuestion={currentQuestion}
-            selectedAnswer={selectedAnswer}
+            selectedAnswerId={selectedAnswer}
             setAnswer={setAnswer}
             handleNext={handleNext}
             handleBack={handleBack}
@@ -60,8 +74,11 @@ const QuizPlayer = () => {
           />
         </div>
         <div className="lg:col-span-4 space-y-4">
-          <div className="hidden lg:block">
-            <Timer startTime={currentSession.startTime} />
+          <div className="hidden lg:block sticky top-20">
+            {currentSession.timeLimit ?
+              <CountdownTimer timeLimit={currentSession.timeLimit} onTimeUp={finishSession} /> :
+              <Timer startTime={currentSession.startTime} />
+            }
           </div>
 
           <ProgressSession

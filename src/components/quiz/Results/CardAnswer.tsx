@@ -4,15 +4,15 @@ import type { Question } from "../../../types/types";
 interface CardAnswerProps {
   q: Question;
   idx: number;
-  userAnswer: number;
+  userAnswerId: string;
 }
 
-const CardAnswer = ({ q, idx, userAnswer }: CardAnswerProps) => {
+const CardAnswer = ({ q, idx, userAnswerId }: CardAnswerProps) => {
 
-  const { correctOptionIndex, options, prompt, explanation } = q;
-  const answerIndex = userAnswer;
-
-  const isCorrect = answerIndex === correctOptionIndex;
+  const { correctOptionId, options, prompt, explanation } = q;
+  const answerIndex = options.findIndex(option => option.id === userAnswerId);
+  const correctOptionIndex = options.findIndex(option => option.id === correctOptionId);
+  const isCorrect = userAnswerId === correctOptionId;
 
   return (
     <div className={`bg-white rounded-3xl p-8 shadow-sm border-l-8 transition-all hover:shadow-lg ${isCorrect ? 'border-sage ring-1 ring-sage/5' : 'border-red-400 ring-1 ring-red-400/5'}`}>
@@ -45,14 +45,14 @@ const CardAnswer = ({ q, idx, userAnswer }: CardAnswerProps) => {
         <div className={`flex flex-col gap-1 p-5 rounded-2xl border-2 ${isCorrect ? 'bg-sage/5 border-sage/20 shadow-sm' : 'bg-red-50/30 border-red-100'}`}>
           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tu Selección</p>
           <p className={`text-lg font-black ${isCorrect ? 'text-sage' : 'text-red-400/70 line-through'}`}>
-            {options[answerIndex] ?? "Sin respuesta"}
+            {options[answerIndex]?.text ?? "Sin respuesta"}
           </p>
         </div>
         
         {!isCorrect && (
           <div className="flex flex-col gap-1 p-5 rounded-2xl bg-sage/10 border-2 border-sage/30 shadow-md">
             <p className="text-[10px] font-black text-sage uppercase tracking-widest">Solución Correcta</p>
-            <p className="text-lg font-black text-slate-800">{options[correctOptionIndex]}</p>
+            <p className="text-lg font-black text-slate-800">{options[correctOptionIndex]?.text}</p>
           </div>
         )}
       </div>

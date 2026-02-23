@@ -21,21 +21,24 @@ export const parseQuizTxt = (text: string): Partial<Quiz> => {
         questions.push(currentQuestion as Question);
       }
       currentQuestion = {
-        id: Math.random().toString(36).substr(2, 9),
+        id: crypto.randomUUID(),
         prompt: line.substring(2).trim(),
         options: [],
-        correctOptionIndex: -1,
+        correctOptionId: "",
         explanation: ""
       };
     } else if (line.match(/^[a-zA-Z]\)/)) {
       if (currentQuestion) {
         let optionText = line.substring(2).trim();
         const isCorrect = optionText.endsWith('*');
+        const optionId = crypto.randomUUID();
         if (isCorrect) {
           optionText = optionText.slice(0, -1).trim();
-          currentQuestion.correctOptionIndex = (currentQuestion.options?.length || 0);
+          currentQuestion.correctOptionId = optionId;
         }
-        currentQuestion.options?.push(optionText);
+
+        const newOption = { id: optionId, text: optionText };
+        currentQuestion.options?.push(newOption);
       }
     } else if (line.toLowerCase().startsWith('e:')) {
       if (currentQuestion) {

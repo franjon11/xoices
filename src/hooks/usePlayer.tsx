@@ -9,12 +9,16 @@ export const usePlayer = (totalQuestions: number) => {
   const completeSession = useSessionStore(state => state.completeSession)
   const setCurrentQuestionIndex = useSessionStore(state => state.setCurrentQuestionIdx)
 
+  const finishSession = () => {
+    completeSession();
+    navigate('/results');
+  }
+
   const handleNext = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      completeSession();
-      navigate('/results');
+      finishSession();
     }
   };
 
@@ -32,13 +36,14 @@ export const usePlayer = (totalQuestions: number) => {
   const isFirstQuestion = currentQuestionIndex === 0
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1
 
-  const typeQuestion = isFirstQuestion ? "first" : (isLastQuestion ? "last" : "middle")
+  const typeQuestion = isLastQuestion ? "last" : (isFirstQuestion ? "first" : "middle")
 
   return {
     currentQuestionIndex,
     handleNext,
     handleBack,
     goToQuestion,
-    typeQuestion: typeQuestion as TypeQuestion
+    typeQuestion: typeQuestion as TypeQuestion,
+    finishSession
   }
 }
