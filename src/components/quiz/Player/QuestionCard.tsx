@@ -20,9 +20,9 @@ const QuestionCard = ({ currentQuestion, selectedAnswerId, setAnswer, handleNext
   const isLastQuestion = typeQuestion === "last"
 
   return (
-    <section className="bg-white rounded-[2rem] border-2 border-sage shadow-2xl shadow-sage/10 overflow-hidden">
+    <section className="bg-white dark:bg-slate-700/90 rounded-[2rem] border-2 border-sage shadow-2xl shadow-sage/10 overflow-hidden">
       <div className="p-5 md:p-10 space-y-5">
-        <div className="text-md md:text-lg font-black text-slate-800 leading-tight quiz-prompt">
+        <div className="text-md md:text-lg font-black text-slate-800 leading-tight quiz-prompt dark:text-sage-light">
           {prompt}
         </div>
 

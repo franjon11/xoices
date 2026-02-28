@@ -11,8 +11,8 @@ interface AuthState {
 
 const initialUser: User = {
   id: '1',
-  name: 'Francisco',
-  avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+  name: 'Dalma',
+  avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Dalma&backgroundColor=ffd5dc,d81b60&backgroundType=gradientLinear&backgroundRotation=-290&'
 }
 
 export const useAuthStore = create<AuthState>()(

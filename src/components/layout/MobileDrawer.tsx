@@ -13,7 +13,7 @@ interface MobileDrawerProps {
 
 const MobileDrawer = forwardRef<HTMLDivElement, MobileDrawerProps>(({ toggleSidebar }: MobileDrawerProps, ref) => {
   return (
-    <div ref={ref} className="fixed z-100 top-0 left-0 h-full w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-out md:hidden -translate-x-full">
+    <div ref={ref} className="fixed z-100 top-0 left-0 h-full w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-out md:hidden -translate-x-full dark:bg-slate-700 dark:border-sage-light">
       <div className="p-4">
         <Logo />
         <button className="absolute top-4 right-4 text-slate-600 hover:text-sage" onClick={toggleSidebar}>

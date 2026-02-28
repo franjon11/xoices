@@ -20,8 +20,8 @@ const OptionAnswer = ({ option, idx, setAnswer, questionId, selected = false }: 
     <label 
       className={`group flex items-center gap-5 rounded-2xl border-2 py-4 px-6 cursor-pointer transition-all duration-300 ${
         selected
-          ? 'border-sage bg-sage/5 ring-4 ring-sage/10' 
-          : 'border-slate-100 bg-slate-50 hover:border-sage/40 hover:bg-white'
+          ? 'border-sage bg-sage/5 ring-4 ring-sage/10 dark:border-sage/10 dark:bg-sage' 
+          : 'border-slate-100 bg-slate-50 hover:border-sage/40 hover:bg-white dark:border-sage dark:bg-sage/40 dark:hover:border-sage/40 dark:hover:bg-sage'
       }`}
     >
       <input 
@@ -35,10 +35,10 @@ const OptionAnswer = ({ option, idx, setAnswer, questionId, selected = false }: 
         selected ? 'border-sage bg-white scale-110' : 'border-slate-300'
       }`}>
         {selected && <Check className="text-sage size-4 animate-in zoom-in-50" strokeWidth={4} />}
-        {!selected && <span className="text-[10px] font-black text-slate-300">{String.fromCharCode(65 + idx)}</span>}
+        {!selected && <span className="text-[10px] font-black text-slate-300 dark:text-slate-50">{String.fromCharCode(65 + idx)}</span>}
       </div>
       <div className="flex-1">
-        <p className={`text-sm ${selected ? 'font-black text-slate-800' : 'font-bold text-slate-600'}`}>
+        <p className={`text-sm ${selected ? 'font-black text-slate-800 dark:text-white' : 'font-bold text-slate-600 dark:text-white'}`}>
           {option.text}
         </p>
       </div>

@@ -20,8 +20,8 @@ const FileDropZone = ({ onFileSelect, onError }: FileDropZoneProps) => {
       onDrop={handleDrop}
       onClick={() => !fileName && fileInputRef.current?.click()}
       className={`flex flex-col items-center gap-6 rounded-xl border-2 border-dashed transition-all px-6 py-14 
-          ${fileName ? 'border-sage bg-sage/5 cursor-default' : 'border-sage/40 bg-almond/5 hover:border-sage/60 hover:bg-almond/10 cursor-pointer'}
-          ${isDragging ? 'border-sage bg-sage/10 scale-[0.98]' : ''}`}
+          ${fileName ? 'border-sage bg-sage/5 cursor-default dark:bg-sage/50' : 'border-sage/40 dark:border-sage-dark bg-almond/5 hover:border-sage/60 hover:bg-almond/10 cursor-pointer'}
+          ${isDragging ? 'border-sage bg-sage/10 scale-[0.98] dark:bg-sage/50 dark:text-sage-dark' : ''}`}
     >
       <input
         type="file"

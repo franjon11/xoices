@@ -21,7 +21,7 @@ const ModalContainer = ({ children, open = false, size = "xl" }: ModalContainerP
 
   return open && (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-51 
+      <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-51 dark:bg-slate-700
           flex flex-col items-center justify-between gap-4 p-6
           bg-white rounded-lg shadow-xl ${sizeMap[size]}`}>
         {children}

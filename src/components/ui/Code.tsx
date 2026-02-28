@@ -6,8 +6,8 @@ interface CodeProps {
 }
 
 const initialClassName = 'px-1 rounded font-black';
-const initialBg = 'bg-sage/20';
-const initialTextColor = 'text-slate-800';
+const initialBg = 'bg-sage/20 dark:bg-slate-200';
+const initialTextColor = 'text-slate-800 dark:text-sage';
 const Code = ({ label, className = initialClassName, bg = initialBg, textColor = initialTextColor }: CodeProps) => {
   return (
     <code className={`${initialClassName} ${bg} ${textColor} ${className}`}>

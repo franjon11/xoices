@@ -16,7 +16,7 @@ const QuizInfo = ({ title, description }: QuizInfoProps) => {
   const { ref: descriptionRef, value: descriptionValue = "" } = description;
 
   return (
-    <SectionContainer className="relative p-6">
+    <SectionContainer className="relative p-6 dark:bg-slate-700/80">
       <div className="space-y-6">
         <div>
           <label className="block text-[10px] font-black text-sage uppercase tracking-[0.2em] mb-3">Título del Examen</label>
@@ -24,7 +24,7 @@ const QuizInfo = ({ title, description }: QuizInfoProps) => {
             type="text" 
             defaultValue={titleValue}
             ref={titleRef}
-            className="w-full bg-almond/20 border-2 border-sage/10 rounded-2xl px-6 py-4 text-md font-black focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all placeholder:text-slate-300"
+            className="w-full bg-almond/20 border-2 border-sage/10 rounded-2xl px-6 py-4 text-md font-black focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all placeholder:text-slate-300 dark:text-white"
             placeholder="Ej: Historia del Arte Moderno"
           />
         </div>
@@ -33,7 +33,7 @@ const QuizInfo = ({ title, description }: QuizInfoProps) => {
           <textarea 
             defaultValue={descriptionValue}
             ref={descriptionRef}
-            className="w-full bg-almond/20 border-2 border-sage/10 rounded-2xl px-6 py-4 text-sm font-medium focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all resize-none placeholder:text-slate-300"
+            className="w-full bg-almond/20 border-2 border-sage/10 rounded-2xl px-6 py-4 text-sm font-medium focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all resize-none placeholder:text-slate-300 dark:text-white"
             placeholder="Describe el alcance de esta evaluación..."
             rows={2}
           />

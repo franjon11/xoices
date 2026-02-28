@@ -22,7 +22,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
 
   return (
     <SectionContainer ref={refSection} bordered>
-      <header className="bg-almond/40 px-6 py-4 flex items-center justify-between border-b border-sage/10">
+      <header className="bg-almond/40 px-6 py-4 flex items-center justify-between border-b border-sage/10 dark:bg-slate-700/90">
         <div className="flex items-center gap-3">
           <span className="bg-sage text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Pregunta {currentQuestionIdx + 1}</span>
         </div>
@@ -33,7 +33,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
     
       <main
         data-collapse="false"
-        className="overflow-hidden transition-all duration-500 ease-in-out delay-100 slide-in-from-top-4
+        className="overflow-hidden transition-all duration-500 ease-in-out delay-100 slide-in-from-top-4 dark:bg-slate-700/80
           data-[collapse=true]:max-h-0
           data-[collapse=false]:max-h-[1000px]
         ">
@@ -43,6 +43,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
               key={`${question.id}-${currentQuestionIdx}-prompt`}
               label="Enunciado"
               defaultValue={question.prompt}
+              className="dark:text-white"
               ref={refPrompt}
               as="textarea"
               rows={4}
@@ -56,6 +57,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
               label="Explicación"
               defaultValue={question.explanation}
               ref={refExplanation}
+              className="dark:text-white"
               as="textarea"
               rows={2}
               placeholder="Escribe la explicación..."
@@ -63,7 +65,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
           </div>
 
           <div className="space-y-6">
-            <label className="block text-[10px] font-black text-sage uppercase tracking-[0.2em]">Opciones de Respuesta</label>
+            <label className="block text-[10px] font-black text-sage uppercase tracking-[0.2em] ">Opciones de Respuesta</label>
             <div className="grid grid-cols-1 gap-4">  
               {question.options.map((option, idx) => (
                 <div key={`${question.id}-${currentQuestionIdx}-option-${idx}`} className="flex items-center gap-4 group">
@@ -84,7 +86,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
                     type="text"
                     defaultValue={option.text}
                     ref={el => addRefOption(el, idx)}
-                    className="flex-1 bg-almond/10 border-2 border-sage/10 rounded-2xl px-6 py-3 text-sm focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all"
+                    className="flex-1 bg-almond/10 border-2 border-sage/10 rounded-2xl px-6 py-3 text-sm focus:ring-4 focus:ring-sage/20 focus:border-sage outline-none transition-all dark:text-white"
                     placeholder={`Opción ${getCharForIdx(idx)}`}
                   />
                 </div>

@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router'
 import GlobalLoader from './components/ui/GlobalLoader'
 import MainLayout from './layouts/MainLayout'
 import { PAGES } from './types/constants';
+import { ThemeProvider } from './providers/ThemeProvider';
 
 const Home = lazy(() => import('./pages/Home'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -29,14 +30,16 @@ function App() {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <MainLayout>
-        <Routes>
-          {Object.entries(Pages).map(([path, Component]) => (
-            <Route key={path} path={path} element={<Component />} />
-          ))}
-          <Route path="*" element={<Navigate to={PAGES.NOT_FOUND} replace />} />
-        </Routes>
-      </MainLayout>
+      <ThemeProvider>
+        <MainLayout>
+          <Routes>
+            {Object.entries(Pages).map(([path, Component]) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
+            <Route path="*" element={<Navigate to={PAGES.NOT_FOUND} replace />} />
+          </Routes>
+        </MainLayout>
+      </ThemeProvider>
     </Suspense>
   )
 }

@@ -1,16 +1,17 @@
 //** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'selector',
   theme: {
     extend: {
       colors: {
         "sage": {
           DEFAULT: "#84a59d",
-          light: "#a3c0b9",
-          dark: "#6b8a82"
+          light: "#b2d2c0ff",
+          dark: "#759189ff"
         },
         "almond": {
           DEFAULT: "#f7ede2",
-          dark: "#e5be94",
+          dark: "#e0a668ff",
           light: "#fbf6f1"
         }
       },

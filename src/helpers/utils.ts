@@ -17,3 +17,5 @@ export const randomizeQuestions = (questions: Question[], limit?: number) => {
 
   return questionsAux;
 }
+
+export const getPreferedTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

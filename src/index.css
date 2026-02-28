@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-almond text-slate-800 antialiased min-h-screen;
+    @apply bg-almond dark:bg-sage-dark/50 text-slate-800 dark:text-slate-600 antialiased min-h-screen;
   }
 }
 

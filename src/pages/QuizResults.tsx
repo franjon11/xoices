@@ -24,8 +24,8 @@ const QuizResults = () => {
 
   return (
     <MainContainer>
-      <SectionContainer className="border border-sage/10 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden p-5">
-        <div className="absolute top-0 right-0 size-64 bg-sage/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+      <SectionContainer className="border border-sage/10 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden p-5 dark:border-sage-dark/10 dark:bg-sage-dark/90">
+        <div className="absolute top-0 right-0 size-64 bg-sage/5 rounded-full -mr-32 -mt-32 blur-3xl dark:bg-sage-dark/40"></div>
         
         <PieChart percentage={percentage} />
 
@@ -39,9 +39,9 @@ const QuizResults = () => {
       </SectionContainer>
 
       <div className="space-y-6">
-        <h3 className="text-2xl font-black text-slate-800 px-2 flex items-center gap-3">
+        <h3 className="text-2xl font-black text-slate-800 px-2 flex items-center gap-3 dark:text-slate-600">
           Análisis Detallado
-          <div className="h-px bg-sage/20 flex-1"></div>
+          <div className="h-px bg-sage/20 flex-1 dark:bg-sage-dark/20"></div>
         </h3>
         <div className="grid grid-cols-1 gap-6">
           {questions.map((q, idx) =>

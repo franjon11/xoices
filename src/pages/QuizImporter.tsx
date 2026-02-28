@@ -56,7 +56,7 @@ const QuizImporter = () => {
             description={{ ref: descriptionRef, value: descriptionRef.current?.value }}
           />
           
-          <SectionContainer className="p-4">
+          <SectionContainer className="p-4 dark:bg-slate-700/80">
             <FileDropZone onFileSelect={handleFileUpload} />
           </SectionContainer>
           
@@ -66,9 +66,9 @@ const QuizImporter = () => {
         </div>
 
         <aside className="lg:col-span-4 space-y-8">
-          <SectionContainer className="sticky p-6 top-20">
-            <h3 className="text-sm font-black text-slate-800 flex items-center gap-3 mb-6 uppercase tracking-widest">
-              <div className="size-8 bg-sage rounded-lg flex items-center justify-center text-white">
+          <SectionContainer className="sticky p-6 top-20 dark:bg-sage-dark">
+            <h3 className="text-sm font-black text-slate-800 dark:text-white flex items-center gap-3 mb-6 uppercase tracking-widest">
+              <div className="size-8 bg-sage rounded-lg flex items-center justify-center text-white dark:bg-slate-600">
                 <Info size={16} strokeWidth={3} />
               </div>
               Guía de Sintaxis
@@ -76,23 +76,23 @@ const QuizImporter = () => {
             <div className="space-y-6 text-xs font-medium text-slate-500 leading-loose">
               <div className="flex gap-4">
                 <Keyboard KBD="Q" />
-                <p>Inicia cada pregunta con <Code label="Q:" /> seguido del enunciado.</p>
+                <p className="dark:text-slate-600">Inicia cada pregunta con <Code label="Q:" /> seguido del enunciado.</p>
               </div>
               <div className="flex gap-4">
                 <Keyboard KBD="O" />
-                <p>Lista opciones con etiquetas <Code label="A)" />. Hasta 26 opciones.</p>
+                <p className="dark:text-slate-600">Lista opciones con etiquetas <Code label="A)" />. Hasta 26 opciones.</p>
               </div>
               <div className="flex gap-4">
                 <Keyboard KBD="*" />
-                <p>Marca la opción correcta con un <Code label="*" /> al final.</p>
+                <p className="dark:text-slate-600">Marca la opción correcta con un <Code label="*" /> al final.</p>
               </div>
               <div className="flex gap-4">
                 <Keyboard KBD="E" />
-                <p>Agrega una explicación con la etiqueta <Code label="E:" /> al final.</p>
+                <p className="dark:text-slate-600">Agrega una explicación con la etiqueta <Code label="E:" /> al final.</p>
               </div>
               
-              <div className="bg-almond/20 p-6 rounded-2xl border border-sage/10 font-mono text-[11px] text-slate-600 shadow-inner">
-                <p className="mb-2 text-sage/60 uppercase tracking-tighter">Ejemplo de código</p>
+              <div className="bg-almond/20 dark:bg-white/20 p-6 rounded-2xl border border-sage/10 font-mono text-[11px] text-slate-600 shadow-inner">
+                <p className="mb-2 text-sage/60 uppercase tracking-tighter dark:text-slate-600">Ejemplo de código</p>
                 Q: ¿Cuánto es 5 + 5? <br/>
                 A) 12 <br/>
                 B) 10* <br/>

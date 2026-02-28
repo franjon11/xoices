@@ -1,7 +1,7 @@
 import { Heart, Pencil, Trash2 } from "lucide-react";
 import type { InternalHandleQuiz } from "./QuizCard";
 
-const classNameButtonToolBar = "p-2 md:text-slate-300 transition-colors bg-white rounded-full shadow-md"
+const classNameButtonToolBar = "p-2 md:text-slate-300 transition-colors bg-white rounded-full shadow-md dark:bg-sage/20"
 type TypeToolBar = 'trash' | 'edit' | 'favorite'
 const classNameBtnToolBar = {
   trash: 'text-red-300 md:hover:text-red-300',

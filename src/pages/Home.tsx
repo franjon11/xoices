@@ -66,8 +66,8 @@ const Home = () => {
           <h2 className="text-4xl font-black text-slate-800 tracking-tight">Biblioteca</h2>
           <p className="text-slate-500 font-medium">Gestiona y realiza tus exámenes personalizados.</p>
         </div>
-        <div className="bg-white border border-sage/20 px-4 py-2 rounded-full shadow-sm self-start">
-          <span className="text-sm font-black text-sage uppercase tracking-widest">{quizzes.length} Exámenes</span>
+        <div className="bg-white border border-sage/20 px-4 py-2 rounded-full shadow-sm self-start dark:bg-sage">
+          <span className="text-sm font-black text-sage dark:text-white uppercase tracking-widest">{quizzes.length} Exámenes</span>
         </div>
       </div>
 
