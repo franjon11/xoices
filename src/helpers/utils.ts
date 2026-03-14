@@ -5,7 +5,8 @@ export const getCharForIdx = (idx: number) => {
 }
 
 export const randomizeQuestions = (questions: Question[], limit?: number) => {
-  const questionsAux = questions.sort(() => Math.random() * 3 - 1);
+  const questionsAux = structuredClone(questions);
+  questionsAux.sort(() => Math.random() * 3 - 1);
 
   if (limit) {
     questionsAux.splice(limit);
