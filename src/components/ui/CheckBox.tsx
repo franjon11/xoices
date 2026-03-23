@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
-import type { HTMLAttributes } from "react";
+import type { InputHTMLAttributes } from "react";
 
-type CheckBoxProps = HTMLAttributes<HTMLInputElement> & { checked?: boolean }
+type CheckBoxProps = InputHTMLAttributes<HTMLInputElement>
 const initialClassCheck = "rounded peer transition-all appearance-none shadow hover:shadow-md cursor-pointer border border-sage focus:ring-sage checked:bg-sage size-4"
 const CheckBox = ({ onChange, checked = false, ...restOfProps}: CheckBoxProps) => {
     return (
