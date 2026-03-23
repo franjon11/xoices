@@ -33,7 +33,7 @@ const useQuizDetails = (quiz?: Quiz) => {
     if (!question.prompt || question.options.some(o => !o.text || o.text.trim() === "")) return false
 
     const questionsCopy = structuredClone(questions);
-    let qIdx = questionsCopy.findIndex(q => q.id === question.id);
+    const qIdx = questionsCopy.findIndex(q => q.id === question.id);
     if (qIdx !== -1) {
       questionsCopy[qIdx] = question;
     } else {

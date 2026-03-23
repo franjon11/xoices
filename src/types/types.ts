@@ -41,6 +41,15 @@ export interface QuizSession {
   timeLimit?: number;
 }
 
+export type QuizSelectable = Omit<Quiz, "questions"> & {
+  selected?: boolean
+  questions: QuestionSelectable[]
+}
+
+export type QuestionSelectable = Question & {
+  selected?: boolean
+}
+
 export type ViewType = 'dashboard' | 'create' | 'import' | 'play' | 'results';
 
 export type TypeQuestion = "first" | "middle" | "last"

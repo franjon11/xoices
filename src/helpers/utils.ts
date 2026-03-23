@@ -20,3 +20,5 @@ export const randomizeQuestions = (questions: Question[], limit?: number) => {
 }
 
 export const getPreferedTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+export const totalQuestionsToStr = (totalQuestions: number) => `${totalQuestions} Pregunta${totalQuestions > 1 && "s"}`

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import SectionContainer from "../../layout/SectionContainer";
+import SectionContainer from "../../layout/Section/SectionContainer";
 import { Hourglass } from "lucide-react";
 
 interface CountdownTimerProps {

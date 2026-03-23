@@ -1,5 +1,12 @@
 import { useRef } from "react";
 
+export interface ConfigCollapsable {
+  defaultOpen?: boolean
+  toggleCollapse?: () => void
+  posIcon?: "init" | "final"
+}
+
+
 const useCollapsable = () => {
   const refSection = useRef<HTMLDivElement>(null);
   const toggleCollapse = () => {
@@ -12,14 +19,14 @@ const useCollapsable = () => {
       main.setAttribute("data-collapse", "true");
     }
 
-    const iconBtn = refSection.current?.querySelector("header > button > svg");
+    const iconBtn = refSection.current?.querySelector(".btn-collapse > svg");
     if (!iconBtn) return;
     iconBtn.classList.toggle("rotate-180");
   };
 
   return {
     refSection,
-    toggleCollapse,
+    toggleCollapse
   };
 }
 

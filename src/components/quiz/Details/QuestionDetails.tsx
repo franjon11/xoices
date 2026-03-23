@@ -1,11 +1,13 @@
-import { Check, ChevronDown, FilePlus } from "lucide-react";
+import { Check, FilePlus } from "lucide-react";
 import Button from "../../ui/Button";
 import type { QuestionFormAddProps } from "../../../types/types";
 import { getCharForIdx } from "../../../helpers/utils";
-import SectionContainer from "../../layout/SectionContainer";
+import SectionContainer from "../../layout/Section/SectionContainer";
 import FormInputElement from "../../ui/FormInput";
 import useCollapsable from "../../../hooks/useCollapsable";
 import { useQuestionDetails } from "../../../hooks/useQuestionDetails";
+import HeaderSection from "../../layout/Section/HeaderSection";
+import MainSection from "../../layout/Section/MainSection";
 
 const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: QuestionFormAddProps) => {
   
@@ -22,21 +24,13 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
 
   return (
     <SectionContainer ref={refSection} bordered>
-      <header className="bg-almond/40 px-6 py-4 flex items-center justify-between border-b border-sage/10 dark:bg-slate-700/90">
-        <div className="flex items-center gap-3">
-          <span className="bg-sage text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Pregunta {currentQuestionIdx + 1}</span>
-        </div>
-        <button onClick={toggleCollapse} className="text-sage p-2 rounded-full" title="Expandir/Colapsar">
-          <ChevronDown size={20} strokeWidth={2.5} className="animate-in transition-all duration-500" />
-        </button>
-      </header>
+      <HeaderSection collapsable={{ toggleCollapse: toggleCollapse, posIcon: "final"}}>
+        <span className="bg-sage text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+          regunta {currentQuestionIdx + 1}
+        </span>
+      </HeaderSection>
     
-      <main
-        data-collapse="false"
-        className="overflow-hidden transition-all duration-500 ease-in-out delay-100 slide-in-from-top-4 dark:bg-slate-700/80
-          data-[collapse=true]:max-h-0
-          data-[collapse=false]:max-h-[1000px]
-        ">
+      <MainSection collapsable>
         <div className="p-8 space-y-8">
           <div className="space-y-4">
             <FormInputElement
@@ -98,7 +92,7 @@ const QuestionDetails = ({ question, currentQuestionIdx, addQuestionToQuiz }: Qu
             Guardar Pregunta
           </Button>
         </div>
-      </main>
+      </MainSection>
     </SectionContainer>
   )
 }

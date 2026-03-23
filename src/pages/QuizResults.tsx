@@ -1,6 +1,6 @@
 import { LayoutDashboard } from "lucide-react";
 import CardAnswer from "../components/quiz/Results/CardAnswer";
-import SectionContainer from "../components/layout/SectionContainer";
+import SectionContainer from "../components/layout/Section/SectionContainer";
 import PieChart from "../components/quiz/Results/PieChart";
 import HeaderSummary from "../components/quiz/Results/HeaderSummary";
 import { useResultSummary } from "../hooks/useResultSummary";

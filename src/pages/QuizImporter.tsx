@@ -6,7 +6,7 @@ import { Info, Terminal } from "lucide-react";
 import Button from "../components/ui/Button";
 import FileDropZone from "../components/ui/FileUpload/FileDropZone";
 import QuizInfo from "../components/quiz/Details/QuizInfo";
-import SectionContainer from "../components/layout/SectionContainer";
+import SectionContainer from "../components/layout/Section/SectionContainer";
 import Keyboard from "../components/ui/Keyboard";
 import Code from "../components/ui/Code";
 import MainContainer from "../components/layout/MainContainter";

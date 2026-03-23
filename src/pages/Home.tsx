@@ -20,8 +20,26 @@ const Home = () => {
     navigate(`/details/${id}`);
   };
 
-  const handleFavoriteQuiz = (_id: string) => {
+  const handleFavoriteQuiz = (id: string) => {
     // TODO: Implementar la lógica de favorito
+    alert("PROXIMAMENTE! " + id);
+  };
+
+  const { open, onOpen, onClose } = useModal()
+  const [selectedQuizId, setSelectedQuizId] = useState<{ id: string, totalQuestions?: number } | null>(null);
+  const handleConfirmStart = (id: string, totalQuestions?: number) => {
+    setSelectedQuizId({ id, totalQuestions });
+    onOpen();
+  };
+
+  const handleStart = (questions?: number, time?: number) => {
+    if (selectedQuizId) {
+      const url = new URL(`/play/${selectedQuizId.id}`, window.location.origin);
+      if (questions) url.searchParams.set('questions', questions.toString());
+      if (time) url.searchParams.set('time', time.toString());
+
+      navigate(url.pathname + url.search);
+    }
   };
 
   if (quizzes.length === 0) {
@@ -33,57 +51,40 @@ const Home = () => {
         <h2 className="text-3xl font-black text-slate-800 mb-3">Tu biblioteca está vacía</h2>
         <p className="text-slate-500 max-w-md mb-10 text-lg">Crea tu primer examen manualmente o importa desde un archivo de texto.</p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button onClick={goTo(PAGES.CREATE_QUIZ)} size="lg" icon={{ component: Plus }}>Crear Manualmente</Button>
-          <Button onClick={goTo(PAGES.IMPORT_QUIZ)} size="lg" variant="outline" icon={{ component: FileUp, animate: 'bounce' }}>Importar .TXT</Button>
+          <Button onClick={goTo(PAGES.CREATE_QUIZ)} size="lg" icon={{ component: Plus }} className="hover:scale-105">Crear Manualmente</Button>
+          <Button onClick={goTo(PAGES.IMPORT_QUIZ)} size="lg" variant="outline" icon={{ component: FileUp, animate: 'bounce' }} className="hover:scale-105">Importar .TXT</Button>
         </div>
       </div>
     );
   }
 
-  const { open, onOpen, onClose } = useModal()
-  const [selectedQuizId, setSelectedQuizId] = useState<{ id: string, totalQuestions?: number } | null>(null);
-  const handleConfirmStart = (id: string, totalQuestions?: number) => {
-    setSelectedQuizId({ id, totalQuestions });
-    onOpen();
-  };
-
-  const handleStart = (questions?: number, time?: number) => {
-    if (selectedQuizId) {
-      let url = new URL(`/play/${selectedQuizId.id}`, window.location.origin);
-      if (questions) url.searchParams.set('questions', questions.toString());
-      if (time) url.searchParams.set('time', time.toString());
-
-      navigate(url.pathname + url.search);
-    }
-  };
-
   return (
     <>
-    <ModalStartPlay open={open} onClose={onClose} onStart={handleStart} totalQuestions={selectedQuizId?.totalQuestions}  />
-    <div className="space-y-10 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-4xl font-black text-slate-800 tracking-tight">Biblioteca</h2>
-          <p className="text-slate-500 font-medium">Gestiona y realiza tus exámenes personalizados.</p>
+      <ModalStartPlay open={open} onClose={onClose} onStart={handleStart} totalQuestions={selectedQuizId?.totalQuestions}  />
+      <div className="space-y-10 animate-in fade-in duration-500">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-4xl font-black text-slate-800 tracking-tight">Biblioteca</h2>
+            <p className="text-slate-500 font-medium">Gestiona y realiza tus exámenes personalizados.</p>
+          </div>
+          <div className="bg-white border border-sage/20 px-4 py-2 rounded-full shadow-sm self-start dark:bg-sage">
+            <span className="text-sm font-black text-sage dark:text-white uppercase tracking-widest">{quizzes.length} Exámenes</span>
+          </div>
         </div>
-        <div className="bg-white border border-sage/20 px-4 py-2 rounded-full shadow-sm self-start dark:bg-sage">
-          <span className="text-sm font-black text-sage dark:text-white uppercase tracking-widest">{quizzes.length} Exámenes</span>
-        </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {quizzes.map((quiz) => (
-          <QuizCard 
-            key={quiz.id} 
-            quiz={quiz} 
-            onStart={handleConfirmStart} 
-            onDelete={deleteQuiz} 
-            onEdit={handleEditQuiz}
-            onFavorite={handleFavoriteQuiz}
-          />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {quizzes.map((quiz) => (
+            <QuizCard 
+              key={quiz.id} 
+              quiz={quiz} 
+              onStart={handleConfirmStart} 
+              onDelete={deleteQuiz} 
+              onEdit={handleEditQuiz}
+              onFavorite={handleFavoriteQuiz}
+            />
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import type { Question } from "../../../types/types";
-import SectionContainer from "../../layout/SectionContainer";
+import SectionContainer from "../../layout/Section/SectionContainer";
 
 interface ProgressHeaderProps {
   currentQuestionIndex: number;
