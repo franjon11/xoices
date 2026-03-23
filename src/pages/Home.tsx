@@ -60,7 +60,7 @@ const Home = () => {
 
   return (
     <>
-      <ModalStartPlay open={open} onClose={onClose} onStart={handleStart} totalQuestions={selectedQuizId?.totalQuestions}  />
+      <ModalStartPlay key={`modal-start-play-${selectedQuizId?.id ?? 0}`} open={open} onClose={onClose} onStart={handleStart} totalQuestions={selectedQuizId?.totalQuestions}  />
       <div className="space-y-10 animate-in fade-in duration-500">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>

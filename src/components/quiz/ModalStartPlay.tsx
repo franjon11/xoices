@@ -2,7 +2,7 @@ import ModalContainer from "../ui/Modal/ModalContainer";
 import ModalBody from "../ui/Modal/ModalBody";
 import ModalHeader from "../ui/Modal/ModalHeader";
 import ModalFooter from "../ui/Modal/ModalFooter";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 interface ModalStartPlayProps {
   open: boolean;
@@ -17,22 +17,34 @@ const hoursToSeconds = (hours: number) => hours * 60 * 60;
 const secondsToMinutes = (seconds: number) => seconds / 60;
 const secondsToHours = (seconds: number) => seconds / 60 / 60;
 
-const ModalStartPlay = ({ open, onClose, onStart, totalQuestions }: ModalStartPlayProps) => {
+const MIN_VALUE_QUESTIONS = 1;
 
-  const refQuestions = useRef<HTMLInputElement>(null);
+const ModalStartPlay = ({ open, onClose, onStart, totalQuestions = 0 }: ModalStartPlayProps) => {
+
+  const [questionsToPlay, setQuestionsToPlay] = useState<number>(() => totalQuestions);
+
   const [time, setTime] = useState<number>(hoursToSeconds(2));
 
   const handleStart = () => {
-    if (refQuestions.current) {
-      const questions = parseInt(refQuestions.current.value);
-      onStart(questions, time);
-    }
+    onStart(questionsToPlay, time);
   };
 
   const hours = Math.floor(secondsToHours(time));
   const minutes = secondsToMinutes(time) % 60;
 
   const isWithTime = time > 0;
+
+  const handleStepDown = () => setQuestionsToPlay(state => state - 1);
+  const handleStepUp = () => setQuestionsToPlay(state => state + 1);
+  const handleChangeQuestion = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const valueInt = +value;
+    if (valueInt < MIN_VALUE_QUESTIONS) setQuestionsToPlay(MIN_VALUE_QUESTIONS);
+    else if (valueInt > totalQuestions) setQuestionsToPlay(totalQuestions);
+    else {
+      setQuestionsToPlay(valueInt);
+    }
+  }
 
   return (
     <ModalContainer open={open} >
@@ -41,9 +53,9 @@ const ModalStartPlay = ({ open, onClose, onStart, totalQuestions }: ModalStartPl
         <div className="flex flex-col items-center gap-1">
           <label htmlFor="questions" className="dark:text-sage-light tracking-tighter font-medium">Cantidad de preguntas</label>
           <div className="flex items-center gap-2">
-            <button onClick={() => refQuestions.current?.stepDown()} className="border border-sage/20 bg-sage-light/40 rounded-md p-2 w-10 h-10">-</button>
-            <input ref={refQuestions} defaultValue={totalQuestions ?? ""} disabled type="number" id="questions" min={1} max={totalQuestions} className="border border-sage/20 rounded-md py-2 text-center dark:text-sage-light" />
-            <button onClick={() => refQuestions.current?.stepUp()} className="border border-sage/20 bg-sage-light/40 rounded-md p-2 w-10 h-10">+</button>
+            <button onClick={handleStepDown} className="border border-sage/20 bg-sage-light/40 rounded-md p-2 w-10 h-10">-</button>
+            <input onChange={handleChangeQuestion} value={questionsToPlay} type="number" id="questions" min={1} max={totalQuestions} className="border border-sage/20 rounded-md py-2 text-center dark:text-sage-light focus:border-almond-dark focus:outline-none" />
+            <button onClick={handleStepUp} className="border border-sage/20 bg-sage-light/40 rounded-md p-2 w-10 h-10">+</button>
           </div>
         </div>
         <div className="flex flex-col items-center gap-2">
