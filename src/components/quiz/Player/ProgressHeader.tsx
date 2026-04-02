@@ -1,5 +1,7 @@
 import type { Question } from "../../../types/types";
 import SectionContainer from "../../layout/Section/SectionContainer";
+import BoxQuestionNav from "../Navigation/BoxQuestionNav";
+import QuestionNavigation from "../Navigation/QuestionNavigation";
 
 interface ProgressHeaderProps {
   currentQuestionIndex: number;
@@ -32,21 +34,23 @@ const ProgressSession = ({ currentQuestionIndex, totalQuestions, quizTitle = '',
         />
       </div>
 
-      <div className="grid grid-cols-10 gap-2">
+      <QuestionNavigation>
         {
           questions.map(({ id: questionId }, index) => (
-            <button
-              key={`nav_${questionId}`}
+            <BoxQuestionNav
+              questionId={questionId}
               onClick={() => questionAnswers.includes(questionId) && goToQuestion(index)}
-              className={`w-full aspect-square p-3 rounded-md ${
-                currentQuestionIndex === index
-                  ? 'bg-almond-dark'
-                  : (questionAnswers.includes(questionId) ? 'bg-sage dark:bg-slate-600' : 'bg-sage/20 dark:bg-sage-dark/50')
-              }`}
-            />
+              className={currentQuestionIndex === index ? 'bg-almond-dark'
+                : (questionAnswers.includes(questionId) ?
+                  'bg-sage dark:bg-slate-600 text-white' : 'bg-sage/20 dark:bg-sage-dark/50'
+                )
+              }
+            >
+              {index + 1}
+            </BoxQuestionNav>
           ))
         }
-      </div>
+      </QuestionNavigation>
     </SectionContainer>
   )
 }

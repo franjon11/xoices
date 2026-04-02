@@ -11,32 +11,34 @@ import MainContainer from "../components/layout/MainContainter";
 import CountdownTimer from "../components/quiz/Player/ContdownTimer";
 
 const QuizPlayer = () => {
-  const { quizId = "" } = useParams<{ quizId: string }>();
+  const { quizId } = useParams<{ quizId: string }>();
   const { getQuizById } = useQuizFilter();
   const initSession = useSessionStore(state => state.initSession);
+  const currentSession = useSessionStore(state => state.currentSession);
+  const clearSession = useSessionStore(state => state.clearSession);
 
   useEffect(() => {
     clearSession();
-  }, []);
+  }, [clearSession]);
 
   useEffect(() => {
-    const quiz = getQuizById(quizId);
+    if (currentSession != null) return;
+    const quiz = quizId && getQuizById(quizId);
 
     const urlParams = new URLSearchParams(window.location.search);
     const questionsParam = urlParams.get('questions') ?? undefined;
     const timeParam = urlParams.get('time') ?? undefined;
 
     if (quiz) initSession(quiz, questionsParam, timeParam);
-  }, [initSession, quizId]);
+  }, [initSession, quizId, getQuizById, currentSession]);
 
   const navigate = useNavigate();
 
   const quiz = useSessionStore(state => state.currentQuiz);
-  const currentSession = useSessionStore(state => state.currentSession);
+  
   const currentQuestionIndex = useSessionStore(state => state.currentQuestionIdx);
   const setAnswer = useSessionStore(state => state.setAnswer);
-  const clearSession = useSessionStore(state => state.clearSession);
-
+  
   const totalQuestions = quiz?.questions?.length || 0;
 
   const {
@@ -90,7 +92,7 @@ const QuizPlayer = () => {
             goToQuestion={goToQuestion}
           />
 
-          <div className="flex justify-center sticky top-110">
+          <div className="flex justify-center sticky top-150">
             <button 
               onClick={() => { if(confirm('¿Salir del quiz? Se perderá el progreso.')) { clearSession(); navigate('/'); } }}
               className="px-6 py-2 rounded-full text-xs font-black text-slate-400 hover:text-red-500 hover:bg-red-50 flex items-center gap-2 transition-all border border-transparent hover:border-red-100"

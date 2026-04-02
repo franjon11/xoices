@@ -1,7 +1,7 @@
 import type { Question, TypeQuestion } from "../../../types/types";
 import OptionAnswer from "./OptionAnswer";
-import Navigation from "./Navigation";
 import type { SetAnswerFunction } from "../../../store/useSessionStore";
+import StepNavigation from "../Navigation/StepNavigation";
 
 interface QuestionCardProps {
   currentQuestion: Question;
@@ -20,7 +20,7 @@ const QuestionCard = ({ currentQuestion, selectedAnswerId, setAnswer, handleNext
   const isLastQuestion = typeQuestion === "last"
 
   return (
-    <section className="bg-white dark:bg-slate-700/90 rounded-[2rem] border-2 border-sage shadow-2xl shadow-sage/10 overflow-hidden">
+    <section className="bg-white dark:bg-slate-700/90 rounded-4xl border-2 border-sage shadow-2xl shadow-sage/10 overflow-hidden">
       <div className="p-5 md:p-10 space-y-5">
         <div className="text-md md:text-lg font-black text-slate-800 leading-tight quiz-prompt dark:text-sage-light">
           {prompt}
@@ -40,7 +40,7 @@ const QuestionCard = ({ currentQuestion, selectedAnswerId, setAnswer, handleNext
         </div>
       </div>
 
-      <Navigation
+      <StepNavigation
         handleBack={handleBack}
         handleNext={handleNext}
         isFirstQuestion={isFirstQuestion}

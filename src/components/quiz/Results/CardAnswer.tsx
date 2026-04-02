@@ -41,7 +41,7 @@ const CardAnswer = ({ q, idx, userAnswerId }: CardAnswerProps) => {
         </div> */}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-0 sm:ml-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className={`flex flex-col gap-1 p-5 rounded-2xl border-2 ${isCorrect ? 'bg-sage/5 border-sage/20 shadow-sm dark:bg-sage/40 dark:border-sage/70' : 'bg-red-50/30 border-red-100'}`}>
           <p className="text-[10px] font-black text-slate-400 dark:text-slate-700 uppercase tracking-widest">Tu Selección</p>
           <p className={`text-lg font-black ${isCorrect ? 'text-sage dark:text-white' : 'text-red-400/70 line-through'}`}>
@@ -58,8 +58,8 @@ const CardAnswer = ({ q, idx, userAnswerId }: CardAnswerProps) => {
       </div>
 
       {explanation && (
-        <div className="flex items-center gap-3 mt-6 p-6 rounded-2xl bg-slate-50 border-2 border-slate-100 dark:bg-sage/40 dark:border-sage/70">
-          <div className="size-12 bg-sage/10 rounded-2xl flex items-center justify-center text-sage">
+        <div className="flex items-center gap-3 mt-6 p-6 rounded-2xl bg-slate-50 border-2 border-slate-100 dark:bg-blue-500/20 dark:border-blue-300/70">
+          <div className="size-12 bg-sage/10 rounded-2xl flex items-center justify-center text-blue-200">
             <Lightbulb size={24} strokeWidth={2.5} />
           </div>
           <div>

@@ -1,6 +1,7 @@
 import { useSessionStore } from "../store/useSessionStore"
 import { useNavigate } from "react-router"
 import type { TypeQuestion } from "../types/types";
+import { useQuestionNav } from "./useQuestionNav";
 
 export const usePlayer = (totalQuestions: number) => {
   const navigate = useNavigate();
@@ -14,29 +15,8 @@ export const usePlayer = (totalQuestions: number) => {
     navigate('/results');
   }
 
-  const handleNext = () => {
-    if (currentQuestionIndex < totalQuestions - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      finishSession();
-    }
-  };
-
-  const handleBack = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
-  };
-
-  const goToQuestion = (idxQuestion: number) => {
-    if (idxQuestion < 0 || idxQuestion >= totalQuestions) return;
-    setCurrentQuestionIndex(idxQuestion);
-  }
-
-  const isFirstQuestion = currentQuestionIndex === 0
-  const isLastQuestion = currentQuestionIndex === totalQuestions - 1
-
-  const typeQuestion = isLastQuestion ? "last" : (isFirstQuestion ? "first" : "middle")
+  const { handleNext, handleBack, goToQuestion, typeQuestion } = useQuestionNav(
+    totalQuestions, currentQuestionIndex, setCurrentQuestionIndex, finishSession);
 
   return {
     currentQuestionIndex,
