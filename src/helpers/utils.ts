@@ -4,19 +4,22 @@ export const getCharForIdx = (idx: number) => {
   return String.fromCharCode(65 + idx);
 }
 
-export const randomizeQuestions = (questions: Question[], limit?: number) => {
-  const questionsAux = structuredClone(questions);
-  questionsAux.sort(() => Math.random() * 3 - 1);
-
-  if (limit) {
-    questionsAux.splice(limit);
+const fisherYates = <T>(arr: T[]): T[] => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
+};
 
-  questionsAux.forEach((question) => {
-    question.options = question.options.sort(() => Math.random() * 7 - 3);
-  });
+export const randomizeQuestions = (questions: Question[], limit?: number) => {
+  const shuffled = fisherYates(structuredClone(questions));
 
-  return questionsAux;
+  if (limit) shuffled.splice(limit);
+
+  shuffled.forEach(q => { q.options = fisherYates(q.options); });
+
+  return shuffled;
 }
 
 export const getPreferedTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

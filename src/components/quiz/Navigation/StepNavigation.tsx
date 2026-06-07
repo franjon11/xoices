@@ -39,10 +39,9 @@ const StepNavigation = ({ handleBack, handleNext, isFirstQuestion, isLastQuestio
       
       {
         (isPlayer || !isLastQuestion) &&
-        <button 
+        <button
           onClick={handleNext}
-          disabled={isPlayer && selectedAnswerId === undefined}
-          className="grow flex items-center justify-center gap-3 px-8 h-14 rounded-2xl bg-sage text-white font-black hover:bg-sage-dark shadow-xl shadow-sage/20 transition-all disabled:opacity-40 disabled:scale-100 active:scale-95"
+          className="grow flex items-center justify-center gap-3 px-8 h-14 rounded-2xl bg-sage text-white font-black hover:bg-sage-dark shadow-xl shadow-sage/20 transition-all active:scale-95"
         >
           <span className="hidden sm:inline">{isLastQuestion ? ConfigBtn.finish.label : ConfigBtn.next.label}</span>
           <IconBtnType typeBtn={isLastQuestion ? "finish" : "next"} />

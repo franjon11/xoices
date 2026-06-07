@@ -21,9 +21,9 @@ export const useResultSummary = () => {
   const endTimeSession = currentSession?.endTime ?? new Date().getTime()
   const startTime = currentSession?.startTime ?? 0
 
-  const score = questions.reduce((acc, q) => {
-    return acc + (answers[q.id] === q.correctOptionId ? 1 : 0);
-  }, 0);
+  const score = questions.reduce((acc, q) => acc + (answers[q.id] === q.correctOptionId ? 1 : 0), 0);
+  const unanswered = questions.reduce((acc, q) => acc + (!answers[q.id] ? 1 : 0), 0);
+  const incorrect = questions.length - score - unanswered;
 
   const totalQuestions = questions.length
   const percentage = Math.round((score / totalQuestions) * 100);
@@ -51,6 +51,8 @@ export const useResultSummary = () => {
     questions,
     answers,
     score,
+    incorrect,
+    unanswered,
     totalQuestions,
     percentage,
     spentMinutes,

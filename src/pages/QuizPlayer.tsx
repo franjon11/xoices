@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { FlagTriangleRight } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useSessionStore } from "../store/useSessionStore";
@@ -93,12 +93,12 @@ const QuizPlayer = () => {
           />
 
           <div className="flex justify-center sticky top-150">
-            <button 
-              onClick={() => { if(confirm('¿Salir del quiz? Se perderá el progreso.')) { clearSession(); navigate('/'); } }}
-              className="px-6 py-2 rounded-full text-xs font-black text-slate-400 hover:text-red-500 hover:bg-red-50 flex items-center gap-2 transition-all border border-transparent hover:border-red-100"
+            <button
+              onClick={() => { if (confirm('¿Finalizar el cuestionario? Las preguntas sin respuesta quedarán como no respondidas.')) finishSession(); }}
+              className="px-6 py-2 rounded-full text-xs font-black text-slate-400 hover:text-sage hover:bg-sage/10 flex items-center gap-2 transition-all border border-transparent hover:border-sage/20"
             >
-              <LogOut size={16} />
-              TERMINAR SESIÓN
+              <FlagTriangleRight size={16} />
+              FINALIZAR CUESTIONARIO
             </button>
           </div>
         </div>

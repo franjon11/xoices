@@ -24,6 +24,8 @@ const QuizResults = () => {
     questions,
     answers,
     score,
+    incorrect,
+    unanswered,
     totalQuestions,
     percentage,
     spentMinutes,
@@ -45,6 +47,8 @@ const QuizResults = () => {
         <HeaderSummary
           percentage={percentage}
           score={score}
+          incorrect={incorrect}
+          unanswered={unanswered}
           totalQuestions={totalQuestions}
           spentMinutes={spentMinutes}
           spentSeconds={spentSeconds}
@@ -78,15 +82,24 @@ const QuizResults = () => {
         <div className="lg:col-span-4 space-y-4">
           <QuestionNavigation className="sticky top-20 bg-white dark:bg-sage-dark/50 shadow-lg p-6 rounded-2xl">
             {
-              questions.map(({ id: questionId, correctOptionId }, index) => (
-                <BoxQuestionNav
-                  questionId={questionId}
-                  onClick={() => goToQuestion(index)}
-                  className={correctOptionId == answers[questionId] ? 'bg-sage-dark' : 'bg-red-400/70'}
-                >
-                  {index + 1}
-                </BoxQuestionNav>
-              ))
+              questions.map(({ id: questionId, correctOptionId }, index) => {
+                const userAnswer = answers[questionId];
+                const boxClass = !userAnswer
+                  ? 'bg-slate-300 dark:bg-slate-500'
+                  : userAnswer === correctOptionId
+                    ? 'bg-sage-dark'
+                    : 'bg-red-400/70';
+                return (
+                  <BoxQuestionNav
+                    key={`nav_${questionId}`}
+                    questionId={questionId}
+                    onClick={() => goToQuestion(index)}
+                    className={boxClass}
+                  >
+                    {index + 1}
+                  </BoxQuestionNav>
+                );
+              })
             }
           </QuestionNavigation>
 
