@@ -1,6 +1,6 @@
 import { FlagTriangleRight } from "lucide-react";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useSessionStore } from "../store/useSessionStore";
 import QuestionCard from "../components/quiz/Player/QuestionCard";
 import { useQuizFilter } from "../hooks/useQuizFilter";
@@ -31,8 +31,6 @@ const QuizPlayer = () => {
 
     if (quiz) initSession(quiz, questionsParam, timeParam);
   }, [initSession, quizId, getQuizById, currentSession]);
-
-  const navigate = useNavigate();
 
   const quiz = useSessionStore(state => state.currentQuiz);
   

@@ -24,7 +24,7 @@ const IconBtnType = ({ typeBtn }: { typeBtn: TypeBtn }) => {
 }
 
 const initialClassStepNav = "px-10 py-6 flex items-center justify-between gap-3"
-const StepNavigation = ({ handleBack, handleNext, isFirstQuestion, isLastQuestion, selectedAnswerId, isPlayer = true, className = "" }: NavigationProps) => {
+const StepNavigation = ({ handleBack, handleNext, isFirstQuestion, isLastQuestion, isPlayer = true, className = "" }: NavigationProps) => {
   const classStepNav = `${initialClassStepNav} ${className}`
   return (
     <div className={classStepNav}>
