@@ -6,17 +6,15 @@ const initialClassLabel = "block text-[10px] font-black text-sage uppercase trac
 interface BaseProps {
   label?: string;
   as?: 'input' | 'textarea';
-  error?: string;
 }
 
-type FormInputProps = BaseProps & 
+type FormInputProps = BaseProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 const FormInputElement = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormInputProps>(({
   label,
-  as = 'input', 
-  error, 
+  as = 'input',
   className = "", 
   id,
   ...props

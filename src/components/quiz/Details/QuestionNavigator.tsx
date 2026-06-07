@@ -1,5 +1,6 @@
+import { useState } from "react";
 import type { Question } from "../../../types/types";
-import { FilePlus } from "lucide-react";
+import { FilePlus, Search } from "lucide-react";
 import QuestionNav from "./QuestionNav";
 import SectionContainer from "../../layout/Section/SectionContainer";
 
@@ -11,6 +12,13 @@ interface QuestionNavigatorProps {
 }
 
 const QuestionNavigator = ({ questions, currentQuestionIdx, handleSelectQuestion, handleAddNewQuestion }: QuestionNavigatorProps) => {
+  const [search, setSearch] = useState("");
+
+  const paddedSearch = search.trim().padStart(4, '0');
+  const filtered = search.trim()
+    ? questions.filter(q => q.numericId === paddedSearch)
+    : questions;
+
   return (
     <aside className="lg:col-span-4">
       <SectionContainer className="sticky p-4 top-20" bg="sage">
@@ -19,26 +27,48 @@ const QuestionNavigator = ({ questions, currentQuestionIdx, handleSelectQuestion
           <span className="text-xs text-white/90 mt-1">{questions.length} en Total</span>
         </header>
         <main>
-          <div className="flex-1 max-h-[calc(100vh-300px)] overflow-y-auto custom-scrollbar space-y-2 m-4 p-2">
-            {questions.map((question, idx) => (
-              <QuestionNav
-                key={`question-${idx}`}
-                title={question.prompt}
-                index={idx + 1}
-                isSidebarOpen
-                selected={currentQuestionIdx === idx}
-                onClick={() => handleSelectQuestion(idx)}
-              />
-            ))}
-          
-            <QuestionNav
-              title="Nueva Pregunta"
-              index={questions.length + 1}
-              isSidebarOpen
-              isNew
+          <div className="flex items-center gap-2 mx-4 mb-2 px-3 py-2 bg-white/10 rounded-xl border border-white/20">
+            <Search size={13} className="text-white/50 shrink-0" />
+            <input
+              type="number"
+              min={1}
+              max={9999}
+              value={search}
+              onChange={e => setSearch(e.target.value.slice(0, 4))}
+              placeholder="Buscar por ID..."
+              className="w-full bg-transparent text-xs text-white placeholder:text-white/40 font-medium outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
           </div>
-          
+
+          <div className="flex-1 max-h-[calc(100vh-350px)] overflow-y-auto custom-scrollbar space-y-2 m-4 p-2">
+            {filtered.map((question) => {
+              const idx = questions.indexOf(question);
+              return (
+                <QuestionNav
+                  key={`question-${idx}`}
+                  title={question.prompt}
+                  index={idx + 1}
+                  isSidebarOpen
+                  selected={currentQuestionIdx === idx}
+                  onClick={() => handleSelectQuestion(idx)}
+                />
+              );
+            })}
+
+            {filtered.length === 0 && (
+              <p className="text-center text-white/40 text-xs py-4 italic">Sin resultados</p>
+            )}
+
+            {!search.trim() && (
+              <QuestionNav
+                title="Nueva Pregunta"
+                index={questions.length + 1}
+                isSidebarOpen
+                isNew
+              />
+            )}
+          </div>
+
           <div className="pt-4 border-t border-white/10">
             <button
               onClick={handleAddNewQuestion}

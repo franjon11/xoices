@@ -15,13 +15,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [theme]);
 
-  useEffect(() => { 
-    const root = window.document.documentElement; 
+  useEffect(() => {
+    const root = window.document.documentElement;
     const preferedTheme = getPreferedTheme();
 
     if (preferedTheme === "dark" && theme === preferedTheme && !root.classList.contains("dark")) root.classList.add("dark")
     if (preferedTheme === "light" && theme === preferedTheme && root.classList.contains("dark")) root.classList.remove("dark");
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{children}</>;

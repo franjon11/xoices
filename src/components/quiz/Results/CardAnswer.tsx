@@ -1,5 +1,6 @@
 import { Check, Lightbulb, X } from "lucide-react";
 import type { Question } from "../../../types/types";
+import NumericIdBadge from "../../ui/NumericIdBadge";
 
 interface CardAnswerProps {
   q: Question;
@@ -21,8 +22,11 @@ const CardAnswer = ({ q, idx, userAnswerId }: CardAnswerProps) => {
           <div className={`size-10 rounded-2xl shrink-0 flex items-center justify-center font-black text-lg ${isCorrect ? 'bg-sage/10 text-sage' : 'bg-red-50 text-red-500'}`}>
             {idx + 1}
           </div>
-          <div className="text-xl font-bold text-slate-700 leading-tight dark:text-white">
-            {prompt}
+          <div className="flex flex-col gap-1.5">
+            {q.numericId && <NumericIdBadge numericId={q.numericId} />}
+            <div className="text-xl font-bold text-slate-700 leading-tight dark:text-white">
+              {prompt}
+            </div>
           </div>
         </div>
         <div className={`shrink-0 flex items-center self-start gap-2 px-4 py-2 rounded-full font-black uppercase text-[10px] tracking-widest shadow-sm ${isCorrect ? 'bg-sage text-white' : 'bg-red-400 text-white'}`}>

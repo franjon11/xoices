@@ -52,8 +52,8 @@ const QuizImporter = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8 space-y-6">
           <QuizInfo
-            title={{ ref: titleRef, value: titleRef.current?.value }}
-            description={{ ref: descriptionRef, value: descriptionRef.current?.value }}
+            title={{ ref: titleRef }}
+            description={{ ref: descriptionRef }}
           />
           
           <SectionContainer className="p-4 dark:bg-slate-700/80">

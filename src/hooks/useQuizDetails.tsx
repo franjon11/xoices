@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import type { NewQuiz, Question, Quiz } from "../types/types";
 import { useQuizStore } from "../store/useQuizStore";
 import { useNavigate } from "react-router";
+import { formatNumericId, MAX_QUESTIONS } from "../helpers/parser";
 
 const initialOptions = Array.from({ length: 4 }, () => ({
   id: "",
@@ -37,7 +38,12 @@ const useQuizDetails = (quiz?: Quiz) => {
     if (qIdx !== -1) {
       questionsCopy[qIdx] = question;
     } else {
+      if (questionsCopy.length >= MAX_QUESTIONS) {
+        alert(`No se pueden agregar más de ${MAX_QUESTIONS} preguntas.`);
+        return false;
+      }
       question.id = crypto.randomUUID();
+      question.numericId = formatNumericId(questionsCopy.length + 1);
       questionsCopy.push(question);
     }
     setQuestions(questionsCopy);

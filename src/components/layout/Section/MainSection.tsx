@@ -6,8 +6,9 @@ interface MainSectionProps {
   children: ReactNode
 }
 
-function instanceOf<T>(object: any): object is T {
-  return Object.keys(object).some(k => k in object);
+function instanceOf<T>(object: unknown): object is T {
+  if (typeof object !== 'object' || object === null) return false;
+  return Object.keys(object).some(k => k in (object as object));
 }
 
 const initialClass = "overflow-hidden dark:bg-slate-700/80 ";

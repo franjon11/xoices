@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useQuizStore } from "../store/useQuizStore";
 import type { NewQuiz, QuizSelectable } from "../types/types";
 import { useRef, useState } from "react";
+import { formatNumericId, MAX_QUESTIONS } from "../helpers/parser";
 
 const useMergeQuiz = () => {
 	const navigate = useNavigate();
@@ -49,11 +50,20 @@ const useMergeQuiz = () => {
       alert('Se requiere al menos un título y una pregunta seleccionada.');
       return;
     }
+    if (questionSelected.length > MAX_QUESTIONS) {
+      alert(`No se pueden combinar más de ${MAX_QUESTIONS} preguntas.`);
+      return;
+    }
+
+    const questionsWithIds = questionSelected.map((q, idx) => ({
+      ...q,
+      numericId: formatNumericId(idx + 1)
+    }));
 
     const quizData: NewQuiz = {
       title: refTitle.current.value,
       description: refDescription.current?.value ?? '',
-      questions: questionSelected
+      questions: questionsWithIds
     };
 
     addQuiz(quizData);

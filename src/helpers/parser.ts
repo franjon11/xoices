@@ -9,6 +9,12 @@ import type { Question, Quiz } from "../types/types";
  * C) Option 3
  * E: Explanation
  */
+
+export const MAX_QUESTIONS = 9999;
+
+export const formatNumericId = (index: number): string =>
+  String(index).padStart(4, '0');
+
 export const parseQuizTxt = (text: string): Partial<Quiz> => {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
   const questions: Question[] = [];
@@ -20,8 +26,13 @@ export const parseQuizTxt = (text: string): Partial<Quiz> => {
       if (currentQuestion && currentQuestion.prompt && currentQuestion.options?.length) {
         questions.push(currentQuestion as Question);
       }
+      if (questions.length >= MAX_QUESTIONS) {
+        currentQuestion = null;
+        break;
+      }
       currentQuestion = {
         id: crypto.randomUUID(),
+        numericId: formatNumericId(questions.length + 1),
         prompt: line.substring(2).trim(),
         options: [],
         correctOptionId: "",
@@ -48,7 +59,9 @@ export const parseQuizTxt = (text: string): Partial<Quiz> => {
   }
 
   if (currentQuestion != null && currentQuestion.prompt && currentQuestion.options?.length) {
-    questions.push(currentQuestion);
+    if (questions.length < MAX_QUESTIONS) {
+      questions.push(currentQuestion);
+    }
   }
 
   return {

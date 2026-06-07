@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { Question, QuestionFormAddProps } from "../types/types";
 
 type HookQuestionDetailsProps = Omit<QuestionFormAddProps, 'currentQuestionIdx'>;
@@ -8,11 +8,13 @@ export const useQuestionDetails = ({ question, addQuestionToQuiz }: HookQuestion
     const idx = question.options.findIndex(o => o.id === question.correctOptionId);
     return idx !== -1 ? idx : 0;
   }
+  const [prevQuestionId, setPrevQuestionId] = useState(question.id);
   const [correctOptionIdx, setCorrectOptionIdx] = useState(getCorrectOptionIdx);
 
-  useEffect(() => {
+  if (prevQuestionId !== question.id) {
+    setPrevQuestionId(question.id);
     setCorrectOptionIdx(getCorrectOptionIdx());
-  }, [question.id]);
+  }
 
   const refPrompt = useRef<HTMLTextAreaElement>(null);
   const refExplanation = useRef<HTMLTextAreaElement>(null);

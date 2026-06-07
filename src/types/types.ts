@@ -13,6 +13,7 @@ export interface Option {
 
 export interface Question {
   id: string;
+  numericId?: string; // Zero-padded 4-digit sequential identifier (e.g. "0001"), optional for backwards compatibility
   prompt: string;
   options: Option[];
   correctOptionId: string;
