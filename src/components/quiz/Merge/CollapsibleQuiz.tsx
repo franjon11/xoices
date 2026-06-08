@@ -53,7 +53,7 @@ const CollapsibleQuiz = ({ title, questions, onSelectQuestion, onRemove, open = 
 
       {/* Body Animado con useRef */}
       <MainSection collapsable={{ defaultOpen: open }}>
-        <div className="p-4 flex flex-col gap-3">
+        <div className="p-4 flex flex-col gap-3 max-h-96 overflow-y-auto custom-scrollbar">
           {
             questions.map(qe => 
               <QuestionQuiz
